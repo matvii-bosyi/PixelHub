@@ -1,7 +1,7 @@
-# Game Database
+# PixelHub
 
 ## 📌 Project Description
-**Game Database** is a web application that allows users to search, filter, and view information about video games. The data is fetched from the **RAWG API**.
+**PixelHub** is a web application that allows users to search, filter, and view information about video games. The data is fetched from the **RAWG API**.
 
 ## 🔗 API and Description
 **Using:** [RAWG API](https://rawg.io/apidocs)
