@@ -20,7 +20,8 @@ The project uses the following libraries:
 
 ## 🎨 Design
 Design prototype available in Figma:  
-[🔗 Figma Link](#) (`in progress`)
+[🔗 Figma Link](https://www.figma.com/design/61UCxrFUXb8R0wFxgeJF2H/RAWG.IO?node-id=1-486&m=dev)
+[🔗 Figma Link](https://www.figma.com/design/JKojoD79eo2JhVDXxN3TcY/RAWG.IO_v2?node-id=1-1178&m=dev)
 
 ## 🔥 Features
 - **Search games** by title  
