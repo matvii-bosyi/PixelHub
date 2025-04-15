@@ -7,7 +7,7 @@ body {
 }
 
 .wrapper {
-	@apply flex justify-center min-h-[100vh] overflow-hidden;
+	@apply flex justify-center gap-[25px] min-h-[100vh] overflow-hidden;
 }
 
 .container {
@@ -69,4 +69,61 @@ body {
 #searchBox:hover #searchClear img,
 #searchBox:focus-within #searchClear img {
 	@apply invert-0;
+}
+
+/* Aside */
+.asideTitle {
+	@apply text-[23.8px] leading-[28px] text-white font-[700] transition-opacity;
+}
+
+.asideTitleLink:hover {
+	@apply opacity-40
+}
+
+.asideText {
+	@apply text-[15.1px] leading-[19.2px] text-white font-[400];
+}
+
+.asideBlocks {
+	@apply flex flex-col;
+}
+
+#asideBlocksContainer {
+	@apply flex gap-[24px] flex-col;
+}
+
+.asideBlock {
+	@apply flex gap-[8px] flex-col;
+}
+
+.linksContainer {
+	@apply flex flex-col gap-[8px];
+}
+
+.linkItem {
+	@apply flex gap-[8px] items-center cursor-pointer;
+}
+
+.linkItem > .imgWrapper {
+	@apply rounded-[6px] bg-[#2d2d2d] w-[32px] h-[32px] flex items-center justify-center transition-colors;
+}
+
+.linkItem:hover > .imgWrapper {
+	@apply bg-white;
+}
+
+.linkItem:hover > .imgWrapper > img {
+	@apply brightness-0;
+}
+
+.hiddenLinkItem {
+	@apply hidden;
+}
+
+.showMoreButton {
+	@apply opacity-40;
+}
+
+.showMoreButton > .imgWrapper > img {
+	@apply w-[18px] h-[8px];
 }

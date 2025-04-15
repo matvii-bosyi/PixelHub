@@ -20,7 +20,6 @@
 					Rate top games
 				</a>
 
-				<!-- TODO: fix color #searchClear -->
 				<div class="search-box flex relative items-center bg-[#3b3b3b] rounded-full py-[15px] h-[44px] min-w-[470px] transition-colors mr-[32px] flex-1" id="searchBox">
 					<img class="search-icon w-[14px] h-[14px] ml-[16px] mr-[8px]" src="./img/svg/searchIcon.svg" alt="site icon" />
 					<input class="search-input text-white outline-0 flex-1" type="text" id="searchInput" placeholder="Search 884,463 games">
@@ -46,11 +45,24 @@
 				</div>
 			</header>
 			<div class="content">
-				<aside></aside>
+				<aside>
+					<div class="flex flex-col gap-[24px] pt-[39.5px] pb-[24px]">
+						<div>
+							<a class="asideTitle asideTitleLink" href="">Home</a>
+						</div>
+
+						<div>
+							<a class="asideTitle asideTitleLink" href="">Reviews</a>
+						</div>
+
+						<div id="asideBlocksContainer"></div>
+					</div>
+				</aside>
 				<main></main>
 			</div>
 		</div>
 	</div>
-<script src='./js/script.js'></script>
+<script src='./js/search.js'></script>
+<script src='./js/aside.js'></script>
 </body>
 </html>
