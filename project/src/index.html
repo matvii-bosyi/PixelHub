@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
+	<link rel="stylesheet" href="output.css" />
+	<link rel="icon" href="./img/siteIcon.png" sizes="96x96" type="image/png" />
+</head>
+<body>
+	<div class="wrapper">
+		<div class="container">
+			<header class="flex items-center py-[24px]">
+				<a class="text-[18px] font-[900] tracking-[5px] leading-[18px] text-white mr-[32px]" href='./index.html'>
+					RAWG
+				</a>
+
+				<a class="bg-white relative rounded-[4px] py-[6px] pr-[10px] pl-[20px] text-[13px] leading-[14px] tracking-[0] mr-[16px]" href='https://rawg.io/rate/thebest'>
+					<img class="absolute left-0 bottom-0 w-[18px] h-[18px]" src="./img/darts.png" alt="">
+					Rate top games
+				</a>
+
+				<!-- TODO: fix color #searchClear -->
+				<div class="search-box flex relative items-center bg-[#3b3b3b] rounded-full py-[15px] h-[44px] min-w-[470px] transition-colors mr-[32px] flex-1" id="searchBox">
+					<img class="search-icon w-[14px] h-[14px] ml-[16px] mr-[8px]" src="./img/svg/searchIcon.svg" alt="site icon" />
+					<input class="search-input text-white  outline-0 flex-1" type="text" id="searchInput" placeholder="Search 884,463 games">
+					<div class="key-hint font-[monospace] flex items-center text-[#ffffff80] gap-[3.5px] mr-[15px] text-[11px] leading-[13.2px] group-hover:hidden group-focus-within:hidden">
+						<span class="border-[1px] border-[#707070] border-solid rounded-[3px] py-[3px] px-[5px]">alt</span>
+						<span>+</span>
+						<span class="border-[1px] border-[#707070] border-solid rounded-[3px] py-[3px] px-[5px]">enter</span>
+					</div>
+					<button id="searchClear" class="clear-btn w-[20px] h-[20px] hidden absolute m-[6px] right-0 text-white cursor-pointer" type="button">
+						<img class="w-[100%] h-[100%]" src="./img/svg/cross.svg" alt="">
+					</button>
+				</div>
+
+				<div class="flex items-center gap-[16px]">
+					<a class="headerLink" href="#">log in</a>	
+					<a class="headerLink" href="#">sign up</a>	
+					<a class="headerLink" href="#">api</a>	
+					<div class="flex gap-[2px]">
+						<div class="w-[4px] h-[4px] bg-white rounded-full"></div>
+						<div class="w-[4px] h-[4px] bg-white rounded-full"></div>
+						<div class="w-[4px] h-[4px] bg-white rounded-full"></div>
+					</div>
+				</div>
+			</header>
+			<!-- <div class="content">
+				<aside></aside>
+				<main></main>
+			</div> -->
+		</div>
+	</div>
+<script src='./js/script.js'></script>
+</body>
+</html>
