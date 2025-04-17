@@ -8,57 +8,90 @@
 	<link rel="icon" href="./img/siteIcon.png" sizes="96x96" type="image/png" />
 </head>
 <body>
-	<div class="wrapper">
-		<div class="container">
-			<header class="flex items-center py-[24px]">
-				<a class="text-[18px] font-[900] tracking-[5px] leading-[18px] text-white mr-[32px]" href='./index.html'>
+	<div class='wrapper'>
+		<div class='container'>
+			<header class='flex items-center py-[24px]'>
+				<a class='text-[18px] font-[900] tracking-[5px] leading-[18px] text-white mr-[32px]' href='./index.html'>
 					RAWG
 				</a>
 
-				<a class="bg-white relative rounded-[4px] py-[6px] pr-[10px] pl-[20px] text-[13px] leading-[14px] tracking-[0] mr-[16px]" href='https://rawg.io/rate/thebest'>
-					<img class="absolute left-0 bottom-0 w-[18px] h-[18px]" src="./img/darts.png" alt="">
+				<a class='bg-white relative rounded-[4px] py-[6px] pr-[10px] pl-[20px] text-[13px] leading-[14px] tracking-[0] mr-[16px]' href='https://rawg.io/rate/thebest'>
+					<img class='absolute left-0 bottom-0 w-[18px] h-[18px]' src="./img/darts.png" alt="">
 					Rate top games
 				</a>
 
-				<div class="search-box flex relative items-center bg-[#3b3b3b] rounded-full py-[15px] h-[44px] min-w-[470px] transition-colors mr-[32px] flex-1" id="searchBox">
-					<img class="search-icon w-[14px] h-[14px] ml-[16px] mr-[8px]" src="./img/svg/searchIcon.svg" alt="site icon" />
-					<input class="search-input text-white outline-0 flex-1" type="text" id="searchInput" placeholder="Search 884,463 games">
-					<div class="key-hint font-[monospace] flex items-center text-[#ffffff80] gap-[3.5px] mr-[15px] text-[11px] leading-[13.2px] group-hover:hidden group-focus-within:hidden">
-						<span class="border-[1px] border-[#707070] border-solid rounded-[3px] py-[3px] px-[5px]">alt</span>
+				<div class='search-box flex relative items-center bg-[#3b3b3b] rounded-full py-[15px] h-[44px] min-w-[470px] transition-colors mr-[32px] flex-1' id='searchBox'>
+					<img class='search-icon w-[14px] h-[14px] ml-[16px] mr-[8px]' src="./img/svg/searchIcon.svg" alt="site icon" />
+					<input class='search-input text-white outline-0 flex-1' type="text" id='searchInput' placeholder="Search 884,463 games">
+					<div class='key-hint font-[monospace] flex items-center text-[#ffffff80] gap-[3.5px] mr-[15px] text-[11px] leading-[13.2px] group-hover:hidden group-focus-within:hidden'>
+						<span class='border-[1px] border-[#707070] border-solid rounded-[3px] py-[3px] px-[5px]'>alt</span>
 						<span>+</span>
-						<span class="border-[1px] border-[#707070] border-solid rounded-[3px] py-[3px] px-[5px]">enter</span>
+						<span class='border-[1px] border-[#707070] border-solid rounded-[3px] py-[3px] px-[5px]'>enter</span>
 					</div>
-					<button id="searchClear" class="clear-btn w-[22px] h-[22px] mr-[5px] hidden absolute right-0 text-white cursor-pointer" type="button">
-						<img class="w-[10px] h-[10px] m-[6px]" src="./img/svg/cross.svg" alt="">
+					<button id='searchClear' class='clear-btn w-[22px] h-[22px] mr-[5px] hidden absolute right-0 text-white cursor-pointer' type="button">
+						<img class='w-[10px] h-[10px] m-[6px]' src="./img/svg/cross.svg" alt="">
 					</button>
 				</div>
 
-				<div class="flex items-center gap-[16px]">
-					<a class="headerLink" href="#">log in</a>	
-					<a class="headerLink" href="#">sign up</a>	
-					<a class="headerLink" href="#">api</a>	
-					<div class="flex gap-[2px]">
-						<div class="w-[4px] h-[4px] bg-white rounded-full"></div>
-						<div class="w-[4px] h-[4px] bg-white rounded-full"></div>
-						<div class="w-[4px] h-[4px] bg-white rounded-full"></div>
+				<div class='flex items-center gap-[16px]'>
+					<a class='headerLink' href="#">log in</a>	
+					<a class='headerLink' href="#">sign up</a>	
+					<a class='headerLink' href="#">api</a>	
+					<div class='flex gap-[2px]'>
+						<div class='w-[4px] h-[4px] bg-white rounded-full'></div>
+						<div class='w-[4px] h-[4px] bg-white rounded-full'></div>
+						<div class='w-[4px] h-[4px] bg-white rounded-full'></div>
 					</div>
 				</div>
 			</header>
-			<div class="content">
-				<aside>
-					<div class="flex flex-col gap-[24px] pt-[39.5px] pb-[24px]">
+			<div class='content flex w-[100%]'>
+				<aside class='max-w-[220px] min-w-[220px]'>
+					<div class='flex flex-col gap-[24px] pt-[39.5px] pb-[24px]'>
 						<div>
-							<a class="asideTitle asideTitleLink" href="">Home</a>
+							<a class='asideTitle asideTitleLink' href="">Home</a>
 						</div>
 
 						<div>
-							<a class="asideTitle asideTitleLink" href="">Reviews</a>
+							<a class='asideTitle asideTitleLink' href="">Reviews</a>
 						</div>
 
-						<div id="asideBlocksContainer"></div>
+						<div id='asideBlocksContainer'></div>
 					</div>
 				</aside>
-				<main></main>
+				<main class='flex-1'>
+					<div class='flex flex-col gap-[20.5px]'>
+						<div class=''>
+							<h2 class='text-white text-[72px] font-[700] leading-[74px] tracking-[0]'>New and trending</h2>
+							<p class='asideText mt-[8px]'>Based on player counts and release date</p>
+						</div>
+						<div class='flex justify-between'>
+							<div class='customSelect'>
+								<select class='px-[16px] py-[10px] bg-white opacity-[0.07] rounded-[8px]'>
+									<option value="0"><p class='text-white text-[13px] font-[400] leading-[16.8px]'>Order by: <span class='text-[13.7px] font-[700]' id=''></span></p></option>
+									<option value="1">Relevance</option>
+									<option value="2">Date added</option>
+									<option value="3">Name</option>
+									<option value="4">Release date</option>
+									<option value="5">Popularity</option>
+									<option value="6">Average rating</option>
+								</select>
+							</div>
+
+							<div class='flex items-center gap-[15.8px]''>
+								<p class='text-[14px] font-[400] text-white opacity-40'>Dispaly options:</p>
+								<div class='flex gap-[8px]'>
+									<div class='w-[48px] h-[48px] displayActive'>
+										<img class='w-[100%] h-[100%]' src="./img/svg/display1.svg" alt="">
+									</div>
+									<div class='w-[48px] h-[48px]'>
+										<img class='w-[100%] h-[100%]' src="./img/svg/display2.svg" alt="">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id='gamesContainer' class='gamesContainer'></div>
+				</main>
 			</div>
 		</div>
 	</div>
