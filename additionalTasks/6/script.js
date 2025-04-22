@@ -10,18 +10,27 @@ const romanNumerals = {
 
 function convertingNumber(romanNum) {
 	romanNum = romanNum.toUpperCase()
-	
+
 	let total = 0
 
-	for (const index in romanNum) {
-		total += romanNumerals[romanNum[index]]
-		if (romanNumerals[romanNum[index]] === undefined) {
-			return `Не існує римського числа ${romanNum[index]}`
-		}	
+	for (let i = 0; i < romanNum.length; i++) {
+		const current = romanNumerals[romanNum[i]]
+		const next = romanNumerals[romanNum[i + 1]]
+
+		if (current === undefined) {
+			return `Не існує римського числа ${romanNum[i]}`
+		}
+
+		if (next && current < next) {
+			total -= current
+		} else {
+			total += current
+		}
 	}
 
 	return total
 }
+
 
 const myRomanNum = "CmDxI"
 
