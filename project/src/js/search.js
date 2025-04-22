@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		searchInput.focus()
 	})
 
-	// Додаємо обробник для Alt + Enter
 	document.addEventListener('keydown', event => {
 		if (event.altKey && event.key === 'Enter') {
 			searchInput.focus()
