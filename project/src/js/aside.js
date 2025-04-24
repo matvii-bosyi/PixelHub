@@ -1,3 +1,5 @@
+import { renderContent } from './contentGenerate.js'
+
 const asideData = [
 	{
 		title: 'New Releases',
@@ -19,26 +21,26 @@ const asideData = [
 	{
 		title: 'Browse',
 		links: [
-			{ text: 'Platforms', img: './img/svg/aside3_1.svg' },
-			{ text: 'Stores', img: './img/svg/aside3_2.svg' },
-			{ text: 'Collections', img: './img/svg/aside3_3.svg' },
-			{ text: 'Reviews', img: './img/svg/aside3_4.svg' },
-			{ text: 'Genres', img: './img/svg/aside3_5.svg' },
-			{ text: 'Creators', img: './img/svg/aside3_6.svg' },
-			{ text: 'Tags', img: './img/svg/aside3_7.svg' },
-			{ text: 'Developers', img: './img/svg/aside3_8.svg' },
-			{ text: 'Publishers', img: './img/svg/aside3_9.svg' },
+			{ text: 'Platforms', img: './img/svg/aside3_1.svg', link: 'platforms' },
+			{ text: 'Stores', img: './img/svg/aside3_2.svg', link: 'stores' },
+			{ text: 'Collections', img: './img/svg/aside3_3.svg', notWorking: true },
+			{ text: 'Reviews', img: './img/svg/aside3_4.svg', notWorking: true },
+			{ text: 'Genres', img: './img/svg/aside3_5.svg', link: 'genres' },
+			{ text: 'Creators', img: './img/svg/aside3_6.svg', link: 'creators' },
+			{ text: 'Tags', img: './img/svg/aside3_7.svg', link: 'tags' },
+			{ text: 'Developers', img: './img/svg/aside3_8.svg', link: 'developers' },
+			{ text: 'Publishers', img: './img/svg/aside3_9.svg', link: 'publishers' },
 		],
 	},
 	{
 		title: 'Platforms',
 		links: [
-			{ text: 'PC', img: './img/svg/aside4_1.svg' },
-			{ text: 'PlayStation 4', img: './img/svg/aside4_2.svg' },
-			{ text: 'Xbox One', img: './img/svg/aside4_3.svg' },
-			{ text: 'Nintendo Switch', img: './img/svg/aside4_4.svg' },
-			{ text: 'iOS', img: './img/svg/aside4_5.svg' },
-			{ text: 'Android', img: './img/svg/aside4_6.svg' },
+			{ text: 'PC', img: './img/svg/windows-icon.svg' },
+			{ text: 'PlayStation 4', img: './img/svg/playstation-icon.svg' },
+			{ text: 'Xbox One', img: './img/svg/xbox-icon.svg' },
+			{ text: 'Nintendo Switch', img: './img/svg/nintendo-icon.svg' },
+			{ text: 'iOS', img: './img/svg/ios-icon.svg' },
+			{ text: 'Android', img: './img/svg/android-icon.svg' },
 		],
 	},
 	{
@@ -57,6 +59,12 @@ const asideData = [
 	},
 ]
 
+function updateQueryParam(key, value) {
+	const url = new URL(window.location)
+	url.searchParams.set(key, value)
+	window.history.pushState({}, '', url)
+}
+
 function generateAsideBlocks(containerId) {
 	const container = document.getElementById(containerId)
 
@@ -73,9 +81,24 @@ function generateAsideBlocks(containerId) {
 		linksContainer.classList.add('linksContainer')
 
 		block.links.forEach((link, index) => {
-			const linkDiv = document.createElement('div')
+			const linkDiv = document.createElement('a')
 			linkDiv.classList.add('linkItem')
-			if (index >= 3) linkDiv.style.display = 'none'
+			linkDiv.href = '#'
+
+			if (link.notWorking) {
+				linkDiv.classList.add('notWorking')
+			} else {
+				linkDiv.addEventListener('click', event => {
+					event.preventDefault()
+					updateQueryParam(
+						'filter',
+						link.link.toLowerCase().replace(/\s+/g, '_')
+					)
+				})
+				linkDiv.addEventListener('click', () => {
+					renderContent()
+				})
+			}
 
 			const imgDiv = document.createElement('div')
 			imgDiv.classList.add('imgWrapper')
@@ -139,11 +162,22 @@ function generateAsideBlocks(containerId) {
 		if (block.title === 'Top') {
 			const allGamesDiv = document.createElement('div')
 			allGamesDiv.classList.add('asideBlock')
+			allGamesDiv.style.cursor = 'pointer'
 
 			const allGamesLink = document.createElement('a')
 			allGamesLink.classList.add('asideTitle', 'asideTitleLink', 'mb-[8px]')
 			allGamesLink.textContent = 'All Games'
-			allGamesLink.href = '#'
+
+			allGamesLink.addEventListener('click', event => {
+					event.preventDefault()
+					updateQueryParam(
+						'filter',
+						"games".toLowerCase().replace(/\s+/g, '_')
+					)
+				})
+				allGamesLink.addEventListener('click', () => {
+					renderContent()
+				})
 			allGamesDiv.appendChild(allGamesLink)
 
 			container.appendChild(allGamesDiv)

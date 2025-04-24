@@ -22,7 +22,7 @@
 
 				<div class='search-box flex relative items-center bg-[#3b3b3b] rounded-full py-[15px] h-[44px] min-w-[470px] transition-colors mr-[32px] flex-1' id='searchBox'>
 					<img class='search-icon w-[14px] h-[14px] ml-[16px] mr-[8px]' src="./img/svg/searchIcon.svg" alt="site icon" />
-					<input class='search-input text-white outline-0 flex-1' type="text" id='searchInput' placeholder="Search 884,463 games">
+					<input class='search-input text-white outline-0 flex-1 mr-[30px]' type="text" id='searchInput' placeholder="Search 884,994 games">
 					<div class='key-hint font-[monospace] flex items-center text-[#ffffff80] gap-[3.5px] mr-[15px] text-[11px] leading-[13.2px] group-hover:hidden group-focus-within:hidden'>
 						<span class='border-[1px] border-[#707070] border-solid rounded-[3px] py-[3px] px-[5px]'>alt</span>
 						<span>+</span>
@@ -36,11 +36,21 @@
 				<div class='flex items-center gap-[16px]'>
 					<a class='headerLink' href="#">log in</a>	
 					<a class='headerLink' href="#">sign up</a>	
-					<a class='headerLink' href="#">api</a>	
-					<div class='flex gap-[2px]'>
-						<div class='w-[4px] h-[4px] bg-white rounded-full'></div>
-						<div class='w-[4px] h-[4px] bg-white rounded-full'></div>
-						<div class='w-[4px] h-[4px] bg-white rounded-full'></div>
+					<a class='headerLink' href="https://rawg.io/apidocs">api</a>	
+					<div class="relative">
+						<div id='customMenuOpen' class='flex gap-[2px]'>
+							<div class='w-[4px] h-[4px] bg-white rounded-full'></div>
+							<div class='w-[4px] h-[4px] bg-white rounded-full'></div>
+							<div class='w-[4px] h-[4px] bg-white rounded-full'></div>
+						</div>
+						<div id="customMenu" class="absolute w-[170px] top-[-5px] right-0 p-[20px_10px] bg-white rounded-[8px] shadow-lg z-10">
+								<a href='https://rawg.io/leaderboard'>Leaderboard</a>
+								<a href='https://discord.com/invite/erNybDp'>Discord</a>
+								<a href='https://x.com/rawgtheworld'>@rawgtheworld</a>
+								<a href='https://x.com/rawgthepictures'>@rawgthepictures</a>
+								<a href='https://rawg.io/apidocs'>Get an API key</a>
+								<a href='https://rawg.io/html-sitemap/A'>Sitemap</a>
+						</div>
 					</div>
 				</div>
 			</header>
@@ -48,54 +58,97 @@
 				<aside class='max-w-[220px] min-w-[220px]'>
 					<div class='flex flex-col gap-[24px] pt-[39.5px] pb-[24px]'>
 						<div>
-							<a class='asideTitle asideTitleLink' href="">Home</a>
+							<a class='asideTitle asideTitleLink notWorking' href="index.html">Home</a>
 						</div>
 
 						<div>
-							<a class='asideTitle asideTitleLink' href="">Reviews</a>
+							<a class='asideTitle asideTitleLink notWorking' href="">Reviews</a>
 						</div>
 
 						<div id='asideBlocksContainer'></div>
 					</div>
 				</aside>
-				<main class='flex-1'>
+				<main class='flex-1 flex flex-col gap-[24px]'>
 					<div class='flex flex-col gap-[20.5px]'>
 						<div class=''>
-							<h2 class='text-white text-[72px] font-[700] leading-[74px] tracking-[0]'>New and trending</h2>
-							<p class='asideText mt-[8px]'>Based on player counts and release date</p>
+							<h2 id='pageText1' class='text-white text-[72px] font-[700] leading-[74px] tracking-[0]'>New and trending</h2>
+							<p id='pageText2' class='asideText mt-[8px]'>Based on player counts and release date</p>
 						</div>
-						<div class='flex justify-between'>
-							<div class='customSelect'>
-								<select class='px-[16px] py-[10px] bg-white opacity-[0.07] rounded-[8px]'>
-									<option value="0"><p class='text-white text-[13px] font-[400] leading-[16.8px]'>Order by: <span class='text-[13.7px] font-[700]' id=''></span></p></option>
-									<option value="1">Relevance</option>
-									<option value="2">Date added</option>
-									<option value="3">Name</option>
-									<option value="4">Release date</option>
-									<option value="5">Popularity</option>
-									<option value="6">Average rating</option>
-								</select>
+						<div id='orderContainer' class='flex items-center justify-between'>
+							<div class='relative'>
+								<button id="customSelectButton" class="px-[16px] py-[10px] bg-[#ffffff12] rounded-[4px] text-white text-[14px] font-[400] cursor-pointer">
+									<div class='leading-[17.5px] flex items-center'>
+										Order by: 
+										<span id="selectedOption" class="ml-[5px] font-bold text-white">Relevance</span>
+										<div class='w-[12.9px] h-[7px] ml-[6px]'><img class='w-[100%] h-[100%] opacity-40' src="./img/svg/arrow.svg" alt=""></div>
+									</div>
+								</button>
+								<ul id="customSelectMenu" class="absolute top-0 left-0 right-0 px-[10px] pb-[10px] pt-[5px] bg-white rounded-[8px] shadow-lg z-10">
+										<li>
+											<a>
+												<span>Relevance</span>
+												<span class="hidden text-green-500">✔</span>
+											</a>
+										</li>
+										<li>
+											<a>
+												<span>Date added</span>
+												<span class="hidden text-green-500">✔</span>
+											</a>
+										</li>
+										<li>
+											<a>
+												<span>Name</span>
+												<span class="hidden text-green-500">✔</span>
+											</a>
+										</li>
+										<li>
+											<a>
+												<span>Release date</span>
+												<span class="hidden text-green-500">✔</span>
+											</a>
+										</li>
+										<li>
+											<a>
+												<span>Popularity</span>
+												<span class="hidden text-green-500">✔</span>
+											</a>
+										</li>
+										<li>
+											<a>
+												<span>Average rating</span>
+												<span class="hidden text-green-500">✔</span>
+											</a>
+										</li>
+									</ul>
 							</div>
 
 							<div class='flex items-center gap-[15.8px]''>
 								<p class='text-[14px] font-[400] text-white opacity-40'>Dispaly options:</p>
 								<div class='flex gap-[8px]'>
-									<div class='w-[48px] h-[48px] displayActive'>
-										<img class='w-[100%] h-[100%]' src="./img/svg/display1.svg" alt="">
+									<div data-active='true' id='gridDisplayOption' class='displayOptions'>
+										<img src="./img/svg/display1.svg" alt="">
 									</div>
-									<div class='w-[48px] h-[48px]'>
-										<img class='w-[100%] h-[100%]' src="./img/svg/display2.svg" alt="">
+									<div data-active='false' id='listDisplayOption' class='displayOptions'>
+										<img src="./img/svg/display2.svg" alt="">
 									</div>
 								</div>
 							</div>
+
 						</div>
 					</div>
-					<div id='gamesContainer' class='gamesContainer'></div>
+					<div id='contentContainer' data-display="grid">
+					</div>
 				</main>
 			</div>
 		</div>
 	</div>
+
 <script src='./js/search.js'></script>
-<script src='./js/aside.js'></script>
+<script type='module' src='./js/aside.js'></script>
+<script src='./js/customSelect.js'></script>
+<script src='./js/displayOptions.js'></script>
+<script type='module' src='./js/contentGenerate.js'></script>
+<script src='./js/customMenu.js'></script>
 </body>
 </html>

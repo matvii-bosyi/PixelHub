@@ -33,7 +33,6 @@ body {
 	@apply w-[100%];
 }
 
-/* Search */
 #searchBox {
 	@apply relative transition-all duration-300 ease-in-out;
 }
@@ -72,13 +71,12 @@ body {
 	@apply invert-0;
 }
 
-/* Aside */
 .asideTitle {
 	@apply text-[23.8px] leading-[28px] text-white font-[700] transition-opacity;
 }
 
 .asideTitleLink:hover {
-	@apply opacity-40
+	@apply opacity-40;
 }
 
 .asideText {
@@ -97,6 +95,22 @@ body {
 	@apply flex gap-[8px] flex-col;
 }
 
+#customMenu {
+	@apply opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out;
+}
+
+#customMenu.show {
+	@apply opacity-100 pointer-events-auto;
+}
+
+#customMenu > a {
+	@apply p-[4px_10px] text-[14px] leading-[17px] rounded-[4px];
+}
+
+#customMenu > a:hover {
+	@apply bg-[rgba(0,0,0,0.1)];
+}
+
 .linksContainer {
 	@apply flex flex-col gap-[8px];
 }
@@ -109,11 +123,21 @@ body {
 	@apply rounded-[6px] bg-[#2d2d2d] w-[32px] h-[32px] flex items-center justify-center transition-colors;
 }
 
-.linkItem:hover > .imgWrapper {
+.linkItem > .imgWrapper > img {
+	@apply w-[19px] h-[19px]
+}
+
+.asideBlock:last-child > .linksContainer > .linkItem:not(:last-child) > .imgWrapper > img {
+	@apply w-full h-full
+}
+
+.asideBlock:not(:last-child) > .linksContainer > .linkItem:hover > .imgWrapper,
+.showMoreButton:hover > .imgWrapper{
 	@apply bg-white;
 }
 
-.linkItem:hover > .imgWrapper > img {
+.asideBlock:not(:last-child) > .linksContainer > .linkItem:hover > .imgWrapper > img,
+.showMoreButton:hover > .imgWrapper > img{
 	@apply brightness-0;
 }
 
@@ -127,4 +151,126 @@ body {
 
 .showMoreButton > .imgWrapper > img {
 	@apply w-[18px] h-[8px];
+}
+
+#customSelectMenu {
+	@apply p-[10px] pt-[5px] pb-[10px] bg-white rounded-[8px] shadow-md z-[10] absolute top-0 left-0 right-0 opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out;
+}
+
+#customSelectMenu.show {
+	@apply opacity-100 pointer-events-auto;
+}
+
+#customSelectMenu > li {
+	@apply px-[10px] my-[5px] cursor-pointer rounded-[4px];
+}
+
+#customSelectMenu > li:hover {
+	@apply bg-[rgba(0,0,0,0.1)];
+}
+
+#customSelectMenu > li > a {
+	@apply flex justify-between items-center no-underline text-[12px] leading-[20px];
+}
+
+#customSelectMenu > li > a > span:first-child {
+	@apply text-[14px] text-black;
+}
+
+#customSelectMenu > li > a > span:last-child {
+	@apply text-green-500;
+}
+
+.displayOptions {
+	@apply w-[48px] h-[48px] cursor-pointer;
+}
+
+.displayOptions > img {
+	@apply w-[100%] h-[100%];
+}
+
+.displayOptions[data-active='false'] {
+	@apply opacity-40 transition-opacity;
+}
+
+.displayOptions[data-active='false']:hover {
+	@apply opacity-60;
+}
+
+#contentContainer {
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	gap: 24px;
+	margin-bottom: 50px;
+}
+
+@media screen and (max-width: 1919px) {
+	#contentContainer {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+}
+
+@media screen and (max-width: 1439px) {
+	#contentContainer {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+@media screen and (max-width: 1023px) {
+	#contentContainer {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media screen and (max-width: 979px) {
+	#contentContainer {
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+	}
+}
+
+#contentContainer[data-display='grid'] {
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	gap: 24px;
+}
+
+@media screen and (max-width: 1919px) {
+	#contentContainer[data-display='grid'] {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+}
+
+@media screen and (max-width: 1439px) {
+	#contentContainer[data-display='grid'] {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+@media screen and (max-width: 1023px) {
+	#contentContainer[data-display='grid'] {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media screen and (max-width: 979px) {
+	#contentContainer[data-display='grid'] {
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+	}
+}
+
+#contentContainer[data-display='list'] {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 24px;
+}
+
+#contentContainer[data-display='list'] > div {
+	width: 100%;
+	max-width: 600px;
+}
+
+.notWorking {
+	@apply cursor-not-allowed opacity-50 pointer-events-none transition-opacity;
+	@apply hover:cursor-not-allowed
 }
