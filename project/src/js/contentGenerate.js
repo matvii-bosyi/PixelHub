@@ -26,7 +26,7 @@ export function renderContent(append = false) {
 	const url = 'https://api.rawg.io/api/'
 	const query =
 		new URLSearchParams(window.location.search).get('filter') || 'games'
-	// const APIKey = '519a9bd81eb849b68bdcce7eacaec6dc'
+	const APIKey = ''
 	const reqUrl = `${url}${query}?key=${APIKey}`
 
 	function sendRequest(method, url) {
