@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,6 +8,7 @@
 	<link rel="stylesheet" href="output.css" />
 	<link rel="icon" href="./img/siteIcon.png" sizes="96x96" type="image/png" />
 </head>
+
 <body>
 	<div class='wrapper'>
 		<div class='container'>
@@ -15,41 +17,50 @@
 					RAWG
 				</a>
 
-				<a class='bg-white relative rounded-[4px] py-[6px] pr-[10px] pl-[20px] text-[13px] leading-[14px] tracking-[0] mr-[16px]' href='https://rawg.io/rate/thebest'>
+				<a class='bg-white relative rounded-[4px] py-[6px] pr-[10px] pl-[20px] text-[13px] leading-[14px] tracking-[0] mr-[16px]'
+					href='https://rawg.io/rate/thebest'>
 					<img class='absolute left-0 bottom-0 w-[18px] h-[18px]' src="./img/darts.png" alt="">
 					Rate top games
 				</a>
 
-				<div class='search-box flex relative items-center bg-[#3b3b3b] rounded-full py-[15px] h-[44px] min-w-[470px] transition-colors mr-[32px] flex-1' id='searchBox'>
-					<img class='search-icon w-[14px] h-[14px] ml-[16px] mr-[8px]' src="./img/svg/searchIcon.svg" alt="site icon" />
-					<input class='search-input text-white outline-0 flex-1 mr-[30px]' type="text" id='searchInput' placeholder="Search 884,994 games">
-					<div class='key-hint font-[monospace] flex items-center text-[#ffffff80] gap-[3.5px] mr-[15px] text-[11px] leading-[13.2px] group-hover:hidden group-focus-within:hidden'>
+				<div
+					class='search-box flex relative items-center bg-[#3b3b3b] rounded-full py-[15px] h-[44px] min-w-[470px] transition-colors mr-[32px] flex-1'
+					id='searchBox'>
+					<img class='search-icon w-[14px] h-[14px] ml-[16px] mr-[8px]' src="./img/svg/searchIcon.svg"
+						alt="site icon" />
+					<input class='search-input text-white outline-0 flex-1 mr-[30px]' type="text" id='searchInput'
+						placeholder="Search 884,994 games">
+					<div
+						class='key-hint font-[monospace] flex items-center text-[#ffffff80] gap-[3.5px] mr-[15px] text-[11px] leading-[13.2px] group-hover:hidden group-focus-within:hidden'>
 						<span class='border-[1px] border-[#707070] border-solid rounded-[3px] py-[3px] px-[5px]'>alt</span>
 						<span>+</span>
 						<span class='border-[1px] border-[#707070] border-solid rounded-[3px] py-[3px] px-[5px]'>enter</span>
 					</div>
-					<button id='searchClear' class='clear-btn w-[22px] h-[22px] mr-[5px] hidden absolute right-0 text-white cursor-pointer' type="button">
+					<button id='searchClear'
+						class='clear-btn w-[22px] h-[22px] mr-[5px] hidden absolute right-0 text-white cursor-pointer'
+						type="button">
 						<img class='w-[10px] h-[10px] m-auto' src="./img/svg/cross.svg" alt="">
 					</button>
 				</div>
 
 				<div class='flex items-center gap-[16px]'>
-					<a class='headerLink' href="#">log in</a>	
-					<a class='headerLink' href="#">sign up</a>	
-					<a class='headerLink' href="https://rawg.io/apidocs">api</a>	
+					<a class='headerLink' href="#">log in</a>
+					<a class='headerLink' href="#">sign up</a>
+					<a class='headerLink' href="https://rawg.io/apidocs">api</a>
 					<div class="relative">
 						<div id='customMenuOpen' class='flex gap-[2px]'>
 							<div class='w-[4px] h-[4px] bg-white rounded-full'></div>
 							<div class='w-[4px] h-[4px] bg-white rounded-full'></div>
 							<div class='w-[4px] h-[4px] bg-white rounded-full'></div>
 						</div>
-						<div id="customMenu" class="absolute w-[170px] top-[-5px] right-0 p-[20px_10px] bg-white rounded-[8px] shadow-lg z-10">
-								<a href='https://rawg.io/leaderboard'>Leaderboard</a>
-								<a href='https://discord.com/invite/erNybDp'>Discord</a>
-								<a href='https://x.com/rawgtheworld'>@rawgtheworld</a>
-								<a href='https://x.com/rawgthepictures'>@rawgthepictures</a>
-								<a href='https://rawg.io/apidocs'>Get an API key</a>
-								<a href='https://rawg.io/html-sitemap/A'>Sitemap</a>
+						<div id="customMenu"
+							class="absolute w-[170px] top-[-5px] right-0 p-[20px_10px] bg-white rounded-[8px] shadow-lg z-10">
+							<a href='https://rawg.io/leaderboard'>Leaderboard</a>
+							<a href='https://discord.com/invite/erNybDp'>Discord</a>
+							<a href='https://x.com/rawgtheworld'>@rawgtheworld</a>
+							<a href='https://x.com/rawgthepictures'>@rawgthepictures</a>
+							<a href='https://rawg.io/apidocs'>Get an API key</a>
+							<a href='https://rawg.io/html-sitemap/A'>Sitemap</a>
 						</div>
 					</div>
 				</div>
@@ -71,60 +82,64 @@
 				<main class='flex-1 flex flex-col gap-[24px]'>
 					<div class='flex flex-col gap-[20.5px]'>
 						<div class=''>
-							<h2 id='pageText1' class='text-white text-[72px] font-[700] leading-[74px] tracking-[0]'>New and trending</h2>
+							<h2 id='pageText1' class='text-white text-[72px] font-[700] leading-[74px] tracking-[0]'>New and trending
+							</h2>
 							<p id='pageText2' class='asideText mt-[8px]'>Based on player counts and release date</p>
 						</div>
 						<div id='orderContainer' class='flex items-center justify-between'>
 							<div class='relative'>
-								<button id="customSelectButton" class="px-[16px] py-[10px] bg-[#ffffff12] rounded-[4px] text-white text-[14px] font-[400] cursor-pointer">
+								<button id="customSelectButton"
+									class="px-[16px] py-[10px] bg-[#ffffff12] rounded-[4px] text-white text-[14px] font-[400] cursor-pointer">
 									<div class='leading-[17.5px] flex items-center'>
-										Order by: 
+										Order by:
 										<span id="selectedOption" class="ml-[5px] font-bold text-white">Relevance</span>
-										<div class='w-[12.9px] h-[7px] ml-[6px]'><img class='w-[100%] h-[100%] opacity-40' src="./img/svg/arrow.svg" alt=""></div>
+										<div class='w-[12.9px] h-[7px] ml-[6px]'><img class='w-[100%] h-[100%] opacity-40'
+												src="./img/svg/arrow.svg" alt=""></div>
 									</div>
 								</button>
-								<ul id="customSelectMenu" class="absolute top-0 left-0 right-0 px-[10px] pb-[10px] pt-[5px] bg-white rounded-[8px] shadow-lg z-10">
-										<li>
-											<a>
-												<span>Relevance</span>
-												<span class="hidden text-green-500">✔</span>
-											</a>
-										</li>
-										<li>
-											<a>
-												<span>Date added</span>
-												<span class="hidden text-green-500">✔</span>
-											</a>
-										</li>
-										<li>
-											<a>
-												<span>Name</span>
-												<span class="hidden text-green-500">✔</span>
-											</a>
-										</li>
-										<li>
-											<a>
-												<span>Release date</span>
-												<span class="hidden text-green-500">✔</span>
-											</a>
-										</li>
-										<li>
-											<a>
-												<span>Popularity</span>
-												<span class="hidden text-green-500">✔</span>
-											</a>
-										</li>
-										<li>
-											<a>
-												<span>Average rating</span>
-												<span class="hidden text-green-500">✔</span>
-											</a>
-										</li>
-									</ul>
+								<ul id="customSelectMenu"
+									class="absolute top-0 left-0 right-0 px-[10px] pb-[10px] pt-[5px] bg-white rounded-[8px] shadow-lg z-10">
+									<li>
+										<a>
+											<span>Relevance</span>
+											<span class="hidden text-green-500">✔</span>
+										</a>
+									</li>
+									<li>
+										<a>
+											<span>Date added</span>
+											<span class="hidden text-green-500">✔</span>
+										</a>
+									</li>
+									<li>
+										<a>
+											<span>Name</span>
+											<span class="hidden text-green-500">✔</span>
+										</a>
+									</li>
+									<li>
+										<a>
+											<span>Release date</span>
+											<span class="hidden text-green-500">✔</span>
+										</a>
+									</li>
+									<li>
+										<a>
+											<span>Popularity</span>
+											<span class="hidden text-green-500">✔</span>
+										</a>
+									</li>
+									<li>
+										<a>
+											<span>Average rating</span>
+											<span class="hidden text-green-500">✔</span>
+										</a>
+									</li>
+								</ul>
 							</div>
 
 							<div class='flex items-center gap-[15.8px]''>
-								<p class='text-[14px] font-[400] text-white opacity-40'>Dispaly options:</p>
+								<p class=' text-[14px] font-[400] text-white opacity-40'>Dispaly options:</p>
 								<div class='flex gap-[8px]'>
 									<div data-active='true' id='gridDisplayOption' class='displayOptions'>
 										<img src="./img/svg/display1.svg" alt="">
@@ -137,18 +152,56 @@
 
 						</div>
 					</div>
+					<!-- TODO: do hover effect:visibility for last div -->
 					<div id='contentContainer' data-display="grid">
+						<div class="bg-[#202020] shadow-lg relative text-white rounded-[12px] h-fit overflow-hidden">
+							<div class="w-full overflow-hidden" style="aspect-ratio: 16 / 9;">
+								<img src="./img/gameTest.png" class="w-full h-full object-cover object-center" />
+							</div>
+							<div class="px-[16px] pt-[16px] pb-[28px] flex flex-col gap-[]">
+								<div class="flex items-center justify-between mb-[7px]">
+									<div class="flex gap-[6px]">
+										<img src="./img/svg/windows-icon.svg" alt="">
+										<img src="./img/svg/playstation-icon.svg" alt="">
+										<img src="./img/svg/linux-icon.svg" alt="">
+									</div>
+									<div class='min-w-[32px] text-center rounded-[4px] font-[700] text-[14px] text-[#6dc849] border-[1px] border-solid border-[rgba(109,200,73,.4)]'>80</div>
+								</div>
+								<div class="text-[24px] font-[700] leading-[28px] mb-[10px]">
+									Grand Theft Auto V
+								</div>
+								<button class="group bg-[#ffffff1a] flex items-center text-white text-sm p-[6px_8px] rounded gap-[6px] w-fit transition-colors hover:bg-white hover:text-black">
+									<img class='group-hover:brightness-0 w-[12px] h-[12px]' src="./img/svg/plus.svg" alt="">
+									<span class='text-[12px] leading-[12px]'>21,300</span>
+								</button>
+								<div class='flex flex-col'>
+									<div class='flex items-center justify-between text-[12px] py-[12px]'>
+										<span class=' opacity-40'>Release date:</span><span class=''>2015-04-14</span>
+									</div>
+									<div class='flex items-center justify-between text-[12px] py-[12px] border-t-[1px] border-b-[1px] border-solid border-[hsla(0,0%,100%,.07)]'>
+										<span class=' opacity-40'>Genres:</span><span class=''>RPG, Strategy</span>
+									</div>
+									<div class='flex items-center justify-between text-[12px] py-[12px]'>
+										<span class=' opacity-40'>Chart:</span><span class=''>#28 Top 2014</span>
+									</div>
+									<button class='w-full flex items-center justify-between p-[12px_16px] cursor-pointer bg-[hsla(0,0%,100%,.07)] rounded-[8px] text-[14px] text-white transition-colors hover:text-[#fad860]'>Show more like this <img src="./img/svg/arrow.svg" class='-rotate-90 w-[18px] h-[12px] opacity-40' alt="arrow"></button>
+								</div>
+							</div>
+
+
+						</div>
 					</div>
 				</main>
 			</div>
 		</div>
 	</div>
 
-<script src='./js/search.js'></script>
-<script type='module' src='./js/aside.js'></script>
-<script src='./js/customSelect.js'></script>
-<script src='./js/displayOptions.js'></script>
-<script type='module' src='./js/contentGenerate.js'></script>
-<script src='./js/customMenu.js'></script>
+	<script src='./js/search.js'></script>
+	<script type='module' src='./js/aside.js'></script>
+	<script src='./js/customSelect.js'></script>
+	<script src='./js/displayOptions.js'></script>
+	<script type='module' src='./js/contentGenerate.js'></script>
+	<script src='./js/customMenu.js'></script>
 </body>
+
 </html>

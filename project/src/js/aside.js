@@ -4,18 +4,18 @@ const asideData = [
 	{
 		title: 'New Releases',
 		links: [
-			{ text: 'Last 30 days', img: './img/svg/aside1_1.svg' },
-			{ text: 'This week', img: './img/svg/aside1_2.svg' },
-			{ text: 'Next week', img: './img/svg/aside1_3.svg' },
-			{ text: 'Release calendar', img: './img/svg/aside1_4.svg' },
+			{ text: 'Last 30 days', img: './img/svg/aside1_1.svg', notWorking: true },
+			{ text: 'This week', img: './img/svg/aside1_2.svg', notWorking: true },
+			{ text: 'Next week', img: './img/svg/aside1_3.svg', notWorking: true },
+			{ text: 'Release calendar', img: './img/svg/aside1_4.svg', notWorking: true },
 		],
 	},
 	{
 		title: 'Top',
 		links: [
-			{ text: 'Best of the year', img: './img/svg/aside2_1.svg' },
-			{ text: 'Popular in 2024', img: './img/svg/aside2_2.svg' },
-			{ text: 'All time top 250', img: './img/svg/aside2_3.svg' },
+			{ text: 'Best of the year', img: './img/svg/aside2_1.svg', notWorking: true },
+			{ text: 'Popular in 2024', img: './img/svg/aside2_2.svg', notWorking: true },
+			{ text: 'All time top 250', img: './img/svg/aside2_3.svg', notWorking: true },
 		],
 	},
 	{
@@ -93,10 +93,12 @@ function generateAsideBlocks(containerId) {
 					updateQueryParam(
 						'filter',
 						link.link.toLowerCase().replace(/\s+/g, '_')
-					)
-				})
-				linkDiv.addEventListener('click', () => {
-					renderContent()
+						)
+					renderContent(false) // Очищаємо попередній контент
+					 window.scrollTo({
+							top: 0,
+							behavior: 'smooth',
+					})
 				})
 			}
 
@@ -113,6 +115,12 @@ function generateAsideBlocks(containerId) {
 
 			linkDiv.appendChild(imgDiv)
 			linkDiv.appendChild(text)
+
+			// Приховуємо елементи, якщо їх більше ніж 4
+			if (index >= 4) {
+				linkDiv.style.display = 'none'
+			}
+
 			linksContainer.appendChild(linkDiv)
 		})
 
@@ -145,7 +153,7 @@ function generateAsideBlocks(containerId) {
 				)
 
 				hiddenLinks.forEach((link, index) => {
-					if (index >= 3) {
+					if (index >= 4) {
 						link.style.display = isHidden ? 'flex' : 'none'
 					}
 				})
