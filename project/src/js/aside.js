@@ -94,7 +94,8 @@ function generateAsideBlocks(containerId) {
 						'filter',
 						link.link.toLowerCase().replace(/\s+/g, '_')
 						)
-					renderContent(false) // Очищаємо попередній контент
+
+					renderContent(false)
 					 window.scrollTo({
 							top: 0,
 							behavior: 'smooth',

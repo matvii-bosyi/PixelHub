@@ -10,7 +10,7 @@ export function renderGames(data, append = false) {
 	const content = document.getElementById('contentContainer')
 
 	if (!append) {
-		content.innerHTML = '' // Очищаємо контент, якщо це перший запит
+		content.innerHTML = ''
 	}
 
 	content.innerHTML += data.results
@@ -51,30 +51,66 @@ export function renderGames(data, append = false) {
 				)
 			}
 
+			const formattedDate = new Date(`${gameData.released}`).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+			const genresString = gameData.genres.map(g => `<span class='border-b-[1px] border-solid border-[]'>${g.name}</span>`).join(', ');
+
+			const bgImg = gameData.background_image || 'https://placehold.co/1280x720/000000/white?text=404%0APicture+not+found&font=oswald'
+
 			return `
-            <div class="bg-[#202020] relative text-white rounded-[12px] h-fit overflow-hidden font-sans">
-							<div class='absolute'></div>
+					<div class="gameContainer">
+						<div class="gameCard bg-[#202020] shadow-lg text-white rounded-[12px] overflow-hidden h-fit transition-transform hover:scale-103">
 							<div class="w-full overflow-hidden" style="aspect-ratio: 16 / 9;">
-								<img src="${gameData.background_image}" class="w-full h-full object-cover object-center"/>
+								<img src="${bgImg}" class="w-full h-full object-cover object-center" />
 							</div>
-							<div class="px-[16px] pt-[16px] pb-[28px] flex flex-col gap-[]">
+							<div class="px-[16px] pt-[16px] pb-[28px] flex flex-col">
 								<div class="flex items-center justify-between mb-[7px]">
 									<div class="flex gap-[6px]">
 										${platformsHTML.join('')}
 									</div>
+									<div class='min-w-[32px] text-center rounded-[4px] font-[700] text-[14px] text-[#6dc849] border-[1px] border-solid border-[rgba(109,200,73,.4)]'>80</div>
 								</div>
 								<div class="text-[24px] font-[700] leading-[28px] mb-[10px]">
 									${gameData.name}
 								</div>
-								<button class="bg-[#ffffff1a] flex items-center text-white text-sm p-[6px_8px] rounded gap-[6px] w-fit">
-												<img class='w-[12px] h-[12px]' src="./img/svg/plus.svg" alt="">
-												<span class='text-[12px] leading-[12px]'>${gameData.added.toLocaleString()}</span>
+								<button class="group bg-[#ffffff1a] flex items-center text-white text-sm p-[6px_8px] rounded gap-[6px] w-fit transition-colors hover:bg-white hover:text-black">
+									<img class='group-hover:brightness-0 w-[12px] h-[12px]' src="./img/svg/plus.svg" alt="">
+									<span class='text-[12px] leading-[12px]'>${gameData.added.toLocaleString()}</span>
 								</button>
+								<div class='flex-col'>
+									<div class='flex items-center justify-between text-[12px] py-[12px]'>
+										<span class=' opacity-40'>Release date:</span><span></span>${formattedDate}</span>
+									</div>
+									<div class='flex items-center justify-between text-[12px] py-[12px] border-t-[1px] border-b-[1px] border-solid border-[hsla(0,0%,100%,.07)]'>
+										<span class=' opacity-40'>Genres:</span><span>${genresString}</span>
+									</div>
+									<div class='flex items-center justify-between text-[12px] py-[12px]'>
+										<span class=' opacity-40'>Chart:</span><span>Sorry, not working</span>
+									</div>
+									<button class='w-full flex items-center justify-between p-[12px_16px] cursor-pointer bg-[hsla(0,0%,100%,.07)] rounded-[8px] text-[14px] text-white transition-colors hover:text-[#fad860]'>Show more like this <img src="./img/svg/arrow.svg" class='-rotate-90 w-[18px] h-[12px] opacity-40' alt="arrow"></button>
+								</div>
 							</div>
-            </div>
+						</div>
+					</div>
             `
 		})
 		.join('')
+
+	const elements = document.querySelectorAll('.gameContainer')
+	if (elements.length > 0) {
+		elements.forEach((container) => {
+			const childHeight = container.firstElementChild.offsetHeight
+			container.style.maxHeight = `${childHeight}px`
+		})
+	}
+	window.addEventListener('resize', () => {
+		if (elements.length > 0) {
+			elements.forEach((container) => {
+				const childHeight = container.firstElementChild.offsetHeight
+				container.style.maxHeight = `${childHeight}px`
+			})
+	}
+	})
 }
 
 export function renderPlatforms(data) {

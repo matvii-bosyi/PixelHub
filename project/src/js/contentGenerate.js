@@ -10,13 +10,12 @@ import {
 } from './renders.js'
 
 let nextPageUrl = null
-let isLoading = false // Додаємо змінну для блокування запитів
+let isLoading = false
 
 function checkContentHeight() {
 	const contentContainer = document.getElementById('contentContainer')
 	const windowHeight = window.innerHeight
 
-	// Якщо висота контенту менша за висоту вікна і є наступна сторінка, виконуємо запит
 	if (contentContainer.offsetHeight < windowHeight && nextPageUrl) {
 		loadNextPage()
 	}
@@ -24,10 +23,22 @@ function checkContentHeight() {
 
 export function renderContent(append = false) {
 	const url = 'https://api.rawg.io/api/'
-	const query =
-		new URLSearchParams(window.location.search).get('filter') || 'games'
-	const APIKey = ''
-	const reqUrl = `${url}${query}?key=${APIKey}`
+	let filter = null
+	const searchParams = new URLSearchParams(window.location.search)
+
+	if (!searchParams.has('filter')) {
+		searchParams.set('filter', 'games')
+		filter = 'games'
+
+		const newUrl = `${window.location.pathname} ? ${searchParams.toString()}`
+		window.history.replaceState({}, '', newUrl)
+	} else {
+		filter = searchParams.get('filter')
+	}
+	const ordering =
+		new URLSearchParams(window.location.search).get('ordering') || 'popularity'
+	const APIKey = '519a9bd81eb849b68bdcce7eacaec6dc'
+	let reqUrl = `${url}${filter}?key=${APIKey}`
 
 	function sendRequest(method, url) {
 		const headers = {
@@ -61,20 +72,26 @@ export function renderContent(append = false) {
 		publishers: renderPublishers,
 	}
 
+	if (filter === 'games') {
+		reqUrl += `&ordering=${ordering}`
+	} else {
+		const url = new URL(window.location);
+		url.searchParams.delete('ordering');
+		window.history.replaceState({}, '', url);
+	}
+
 	sendRequest('GET', reqUrl)
 		.then(data => {
 			if (!append) {
-				// Очищаємо контейнер, якщо це не додатковий запит
 				const contentContainer = document.getElementById('contentContainer')
 				contentContainer.innerHTML = ''
 			}
 
-			if (renderMap[query]) {
-				renderMap[query](data, append)
+			if (renderMap[filter]) {
+				renderMap[filter](data, append)
 			}
 			nextPageUrl = data.next
 
-			// Перевіряємо висоту контенту після рендерингу
 			checkContentHeight()
 		})
 		.catch(error => {
@@ -83,9 +100,9 @@ export function renderContent(append = false) {
 }
 
 function loadNextPage() {
-	if (!nextPageUrl || isLoading) return // Перевіряємо, чи є наступна сторінка і чи не виконується запит
+	if (!nextPageUrl || isLoading) return
 
-	isLoading = true // Блокуємо наступні запити
+	isLoading = true
 
 	function sendRequest(method, url) {
 		const headers = {
@@ -110,7 +127,7 @@ function loadNextPage() {
 
 	sendRequest('GET', nextPageUrl)
 		.then(data => {
-			const query =
+			const filter =
 				new URLSearchParams(window.location.search).get('filter') || 'games'
 			const renderMap = {
 				games: renderGames,
@@ -123,27 +140,24 @@ function loadNextPage() {
 				publishers: renderPublishers,
 			}
 
-			if (renderMap[query]) {
-				renderMap[query](data, true)
+			if (renderMap[filter]) {
+				renderMap[filter](data, true)
 			}
 			nextPageUrl = data.next
-			isLoading = false // Розблоковуємо запити після завершення
+			isLoading = false
 
-			// Перевіряємо висоту контенту після рендерингу
 			checkContentHeight()
 		})
 		.catch(error => {
 			console.log(error)
-			isLoading = false // Розблоковуємо навіть у разі помилки
+			isLoading = false
 		})
 }
 
-// Додаємо обробник події прокрутки
 window.addEventListener('scroll', () => {
 	const scrollPosition = window.scrollY + window.innerHeight
 	const scrollHeight = document.documentElement.scrollHeight
 
-	// Виконуємо запит, якщо прокручено більше ніж 97%
 	if (scrollPosition >= scrollHeight * 0.97) {
 		loadNextPage()
 	}

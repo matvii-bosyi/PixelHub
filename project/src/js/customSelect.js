@@ -1,20 +1,20 @@
+import { renderContent } from './contentGenerate.js'
+
 document.addEventListener('DOMContentLoaded', () => {
 	const button = document.getElementById('customSelectButton')
 	const menu = document.getElementById('customSelectMenu')
 	const selectedOption = document.getElementById('selectedOption')
 
 	const url = new URL(window.location)
-	const orderValue = url.searchParams.get('order')
+	const orderValue = url.searchParams.get('ordering')
 	if (orderValue) {
-		selectedOption.textContent = orderValue
-
 		const matchingItem = Array.from(menu.querySelectorAll('li a')).find(
-			item => {
-				return item.querySelector('span').textContent === orderValue
-			}
+			item => item.dataset.ordering === orderValue
 		)
 
 		if (matchingItem) {
+			selectedOption.textContent = matchingItem.querySelector('span').textContent
+
 			menu.querySelectorAll('span.text-green-500').forEach(check => {
 				check.classList.add('hidden')
 			})
@@ -25,8 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	} else {
 		const firstItem = menu.querySelector('li a')
 		if (firstItem) {
-			const value = firstItem.querySelector('span').textContent
-			selectedOption.textContent = value
+			selectedOption.textContent = firstItem.querySelector('span').textContent
 			firstItem.querySelector('span.text-green-500').classList.remove('hidden')
 		}
 	}
@@ -39,8 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		const target = event.target.closest('a')
 		if (target) {
 			event.preventDefault()
-			const value = target.querySelector('span').textContent
-			selectedOption.textContent = value
+			const value = target.dataset.ordering
+			selectedOption.textContent = target.querySelector('span').textContent
 
 			menu.querySelectorAll('span.text-green-500').forEach(check => {
 				check.classList.add('hidden')
@@ -48,8 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			target.querySelector('span.text-green-500').classList.remove('hidden')
 
 			const url = new URL(window.location)
-			url.searchParams.set('order', value)
+			url.searchParams.set('ordering', value)
 			window.history.pushState({}, '', url)
+
+			renderContent(false)
 
 			menu.classList.remove('show')
 		}

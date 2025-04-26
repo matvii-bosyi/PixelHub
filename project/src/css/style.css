@@ -154,7 +154,7 @@ body {
 }
 
 #customSelectMenu {
-	@apply p-[10px] pt-[5px] pb-[10px] bg-white rounded-[8px] shadow-md z-[10] absolute top-0 left-0 right-0 opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out;
+	@apply p-[10px] pt-[5px] pb-[10px] bg-white rounded-[https://generatech.ai/4px] shadow-md z-[10] absolute top-0 left-0 right-0 opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out;
 }
 
 #customSelectMenu.show {
@@ -174,7 +174,7 @@ body {
 }
 
 #customSelectMenu > li > a > span:first-child {
-	@apply text-[14px] text-black;
+	@apply text-[12px] text-black;
 }
 
 #customSelectMenu > li > a > span:last-child {
@@ -198,10 +198,8 @@ body {
 }
 
 #contentContainer {
-	display: grid;
+	@apply grid gap-[24px] mb-[50px];
 	grid-template-columns: repeat(5, minmax(0, 1fr));
-	gap: 24px;
-	margin-bottom: 50px;
 }
 
 @media screen and (max-width: 1919px) {
@@ -229,9 +227,8 @@ body {
 }
 
 #contentContainer[data-display='grid'] {
-	display: grid;
+	@apply grid gap-[24px];
 	grid-template-columns: repeat(5, minmax(0, 1fr));
-	gap: 24px;
 }
 
 @media screen and (max-width: 1919px) {
@@ -259,18 +256,21 @@ body {
 }
 
 #contentContainer[data-display='list'] {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 24px;
+	@apply flex flex-col items-center gap-[24px]
 }
 
 #contentContainer[data-display='list'] > div {
-	width: 100%;
-	max-width: 714px;
+	@apply w-full max-w-[714px];
 }
 
 .notWorking {
-	@apply cursor-not-allowed opacity-50 pointer-events-none transition-opacity;
-	@apply hover:cursor-not-allowed
+	@apply cursor-not-allowed opacity-50 pointer-events-none transition-opacity hover:cursor-not-allowed;
+}
+
+.gameContainer > .gameCard > div:last-child > div:last-child {
+	@apply hidden;
+}
+
+.gameContainer:hover > .gameCard > div:last-child > div:last-child {
+	@apply flex;
 }
