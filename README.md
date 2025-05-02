@@ -1,7 +1,7 @@
-# PixelHub
+# Rawg.io
 
 ## 📌 Project Description
-**PixelHub** is a web application that allows users to search, filter, and view information about video games. The data is fetched from the **RAWG API**.
+**Rawg** is a web application that allows users to search, filter, and view information about video games. The data is fetched from the **RAWG API**.
 
 ## 🔗 API and Description
 **Using:** [RAWG API](https://rawg.io/apidocs)
@@ -16,7 +16,6 @@
 ## 🛠 Additional Plugins and Libraries
 The project uses the following libraries:
 - **Tailwind CSS**
-- **Swiper**
 
 ## 🎨 Design
 Design prototype available in Figma:  
