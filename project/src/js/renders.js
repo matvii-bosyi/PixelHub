@@ -13,51 +13,64 @@ export function renderGames(data, append = false) {
 		content.innerHTML = ''
 	}
 
-	content.innerHTML += data.results
-		.map(gameData => {
-			const platformsHTML = gameData.parent_platforms
-				.slice(0, 6)
-				.map(cardData => {
-					const platformName = cardData.platform.name.toLowerCase()
-					let platformIcon = ''
+	content.innerHTML += data.results.map(gameData => {
+		const platformsHTML = gameData.parent_platforms.map((cardData, index, array) => {
+			const platformName = cardData.platform.name.toLowerCase()
+			let platformIcon = ''
 
-					if (platformName.includes('pc')) {
-						platformIcon = './img/svg/windows-icon.svg'
-					} else if (platformName.includes('xbox')) {
-						platformIcon = './img/svg/xbox-icon.svg'
-					} else if (platformName.includes('playstation')) {
-						platformIcon = './img/svg/playstation-icon.svg'
-					} else if (platformName.includes('nintendo')) {
-						platformIcon = './img/svg/nintendo-icon.svg'
-					} else if (platformName.includes('apple macintosh')) {
-						platformIcon = './img/svg/mac-icon.svg'
-					} else if (platformName.includes('android')) {
-						platformIcon = './img/svg/android-icon.svg'
-					} else if (platformName.includes('linux')) {
-						platformIcon = './img/svg/linux-icon.svg'
-					} else if (platformName.includes('web')) {
-						platformIcon = './img/svg/web-icon.svg'
-					} else if (platformName.includes('ios')) {
-						platformIcon = './img/svg/ios-icon.svg'
-					}
-
-					return `<img src="${platformIcon}" alt="${platformName}" class="w-[16px] h-[16px]"/>`
-				})
-
-			if (gameData.parent_platforms.length > 6) {
-				const extraPlatformsCount = gameData.parent_platforms.length - 6
-				platformsHTML.push(
-					`<span class="text-white text-sm">+${extraPlatformsCount}</span>`
-				)
+			if (platformName.includes('pc')) {
+				platformIcon = './img/svg/windows-icon.svg'
+			} else if (platformName.includes('xbox')) {
+				platformIcon = './img/svg/xbox-icon.svg'
+			} else if (platformName.includes('playstation')) {
+				platformIcon = './img/svg/playstation-icon.svg'
+			} else if (platformName.includes('nintendo')) {
+				platformIcon = './img/svg/nintendo-icon.svg'
+			} else if (platformName.includes('apple macintosh')) {
+				platformIcon = './img/svg/mac-icon.svg'
+			} else if (platformName.includes('android')) {
+				platformIcon = './img/svg/android-icon.svg'
+			} else if (platformName.includes('linux')) {
+				platformIcon = './img/svg/linux-icon.svg'
+			} else if (platformName.includes('web')) {
+				platformIcon = './img/svg/web-icon.svg'
+			} else if (platformName.includes('ios')) {
+				platformIcon = './img/svg/ios-icon.svg'
+			} else if (platformName.includes('sega')) {
+				platformIcon = './img/svg/sega-icon.svg'
+			} else if (platformName.includes('commodore')) {
+				platformIcon = './img/svg/commodore-icon.svg'
+			} else if (platformName.includes('atari')) {
+				platformIcon = './img/svg/atari-icon.svg'
 			}
 
-			const formattedDate = new Date(`${gameData.released}`).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+			if (array.length === 7 && index === 5) {
+				const extraPlatformsCount = array.length - 5
+				return `<span class="text-white text-[14px]">+${extraPlatformsCount}</span>`
+			}
 
-			const genresString = gameData.genres.map(g => `<span class='border-b-[1px] border-solid border-[]'>${g.name}</span>`).join(', ');
+			if (index < 5) {
+				return `<img src="${platformIcon}" alt="${platformName}" class="w-auto h-[13px]"/>`
+			}
 
-			const bgImg = gameData.background_image || 'https://placehold.co/1280x720/000000/white?text=404%0APicture+not+found&font=oswald'
+			return null
+		}).filter(Boolean)
 
-			return `
+		const formattedDate = new Date(`${gameData.released}`).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+
+		const genresString = gameData.genres.map(g => `<span class='border-b-[1px] border-solid border-[]'>${g.name}</span>`).join(', ')
+
+		const bgImg = gameData.background_image || 'https://placehold.co/1280x720/000000/white?text=404%0APicture+not+found&font=oswald'
+
+		function metacriticCheck() {
+			if (gameData.metacritic) {
+				return `<div class='min-w-[32px] text-center rounded-[4px] font-[700] text-[14px] text-[#6dc849] border-[1px] border-solid border-[rgba(109,200,73,.4)]'>${gameData.metacritic}</div>`
+			} else {
+				return `<div></div>`
+			}
+		}
+
+		return `
 					<div class="gameContainer">
 						<div class="gameCard bg-[#202020] shadow-lg text-white rounded-[12px] overflow-hidden h-fit transition-transform hover:scale-103">
 							<div class="w-full overflow-hidden" style="aspect-ratio: 16 / 9;">
@@ -65,10 +78,10 @@ export function renderGames(data, append = false) {
 							</div>
 							<div class="px-[16px] pt-[16px] pb-[28px] flex flex-col">
 								<div class="flex items-center justify-between mb-[7px]">
-									<div class="flex gap-[6px]">
+									<div class="flex items-center gap-[6px]">
 										${platformsHTML.join('')}
 									</div>
-									<div class='min-w-[32px] text-center rounded-[4px] font-[700] text-[14px] text-[#6dc849] border-[1px] border-solid border-[rgba(109,200,73,.4)]'>80</div>
+									${metacriticCheck()}
 								</div>
 								<div class="text-[24px] font-[700] leading-[28px] mb-[10px]">
 									${gameData.name}
@@ -93,7 +106,7 @@ export function renderGames(data, append = false) {
 						</div>
 					</div>
             `
-		})
+	})
 		.join('')
 
 	const elements = document.querySelectorAll('.gameContainer')
@@ -109,7 +122,7 @@ export function renderGames(data, append = false) {
 				const childHeight = container.firstElementChild.offsetHeight
 				container.style.maxHeight = `${childHeight}px`
 			})
-	}
+		}
 	})
 }
 

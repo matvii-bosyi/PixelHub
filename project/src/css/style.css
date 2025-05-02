@@ -154,7 +154,7 @@ body {
 }
 
 #customSelectMenu {
-	@apply p-[10px] pt-[5px] pb-[10px] bg-white rounded-[https://generatech.ai/4px] shadow-md z-[10] absolute top-0 left-0 right-0 opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out;
+	@apply p-[10px] pt-[5px] pb-[10px] bg-white rounded-[4px] shadow-md z-[10] absolute top-0 left-0 right-0 opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out;
 }
 
 #customSelectMenu.show {
@@ -200,6 +200,14 @@ body {
 #contentContainer {
 	@apply grid gap-[24px] mb-[50px];
 	grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+#contentContainer[data-display='list'] {
+	@apply flex flex-col items-center gap-[24px]
+}
+
+#contentContainer[data-display='list'] > div {
+	@apply w-full max-w-[714px];
 }
 
 @media screen and (max-width: 1919px) {
@@ -253,14 +261,6 @@ body {
 	#contentContainer[data-display='grid'] {
 		grid-template-columns: repeat(1, minmax(0, 1fr));
 	}
-}
-
-#contentContainer[data-display='list'] {
-	@apply flex flex-col items-center gap-[24px]
-}
-
-#contentContainer[data-display='list'] > div {
-	@apply w-full max-w-[714px];
 }
 
 .notWorking {
