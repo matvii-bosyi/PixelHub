@@ -22,7 +22,7 @@ body {
 }
 
 .headerLink {
-	@apply text-white text-[14px] leading-[16.8px] tracking-[0] uppercase relative;
+	@apply text-white text-[14px] font-[500] whitespace-nowrap leading-[16.8px] tracking-[0] uppercase relative;
 }
 
 .headerLink::after {
@@ -198,7 +198,7 @@ body {
 }
 
 #contentContainer {
-	@apply grid gap-[24px] mb-[50px];
+	@apply flex gap-[24px] mb-[50px];
 	grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
@@ -208,30 +208,6 @@ body {
 
 #contentContainer[data-display='list'] > div {
 	@apply w-full max-w-[714px];
-}
-
-@media screen and (max-width: 1919px) {
-	#contentContainer {
-		grid-template-columns: repeat(4, minmax(0, 1fr));
-	}
-}
-
-@media screen and (max-width: 1439px) {
-	#contentContainer {
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-	}
-}
-
-@media screen and (max-width: 1023px) {
-	#contentContainer {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-	}
-}
-
-@media screen and (max-width: 979px) {
-	#contentContainer {
-		grid-template-columns: repeat(1, minmax(0, 1fr));
-	}
 }
 
 #contentContainer[data-display='grid'] {
@@ -264,7 +240,7 @@ body {
 }
 
 .notWorking {
-	@apply cursor-not-allowed opacity-50 pointer-events-none transition-opacity hover:cursor-not-allowed;
+	@apply opacity-50 pointer-events-none transition-opacity hover:cursor-not-allowed;
 }
 
 .gameContainer > .gameCard > div:last-child > div:last-child {

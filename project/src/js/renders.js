@@ -1,47 +1,87 @@
-const content = document.getElementById('contentContainer')
+const contentContainer = document.getElementById('contentContainer')
 const text1 = document.getElementById('pageText1')
 const text2 = document.getElementById('pageText2')
 const orderContainer = document.getElementById('orderContainer')
+
+let gameElements = []
+
+function getColumnCount() {
+	const width = window.innerWidth
+	if (width > 1920) return 5
+	if (width > 1439) return 4
+	if (width > 1023) return 3
+	if (width > 979) return 2
+	return 1
+}
+
+function createColumns() {
+	contentContainer.innerHTML = ''
+	const columnCount = getColumnCount()
+
+	for (let i = 0; i < columnCount; i++) {
+		const column = document.createElement('div')
+		column.classList.add('flex', 'flex-col', 'gap-[24px]')
+		column.dataset.columnIndex = i
+		contentContainer.appendChild(column)
+	}
+}
+
+function getShortestColumn() {
+	const columns = Array.from(contentContainer.children)
+	return columns.reduce((shortest, current) => {
+		return current.children.length < shortest.children.length ? current : shortest
+	})
+}
 
 export function renderGames(data, append = false) {
 	text1.innerHTML = 'All Games'
 	text2.classList.add('hidden')
 	orderContainer.classList.remove('hidden')
-	const content = document.getElementById('contentContainer')
 
 	if (!append) {
-		content.innerHTML = ''
+		createColumns()
+		gameElements = []
 	}
 
-	content.innerHTML += data.results.map(gameData => {
+	const columns = Array.from(contentContainer.children)
+	let columnIndex = 0
+
+	data.results.forEach((gameData) => {
+		const column = columns[columnIndex]
+		const gameCard = createGameCard(gameData)
+		gameElements.push(gameCard)
+		column.appendChild(gameCard)
+		columnIndex = (columnIndex + 1) % columns.length
+		updateCardHeights()
+	})
+
+
+
+	function createGameCard(gameData) {
 		const platformsHTML = gameData.parent_platforms.map((cardData, index, array) => {
 			const platformName = cardData.platform.name.toLowerCase()
 			let platformIcon = ''
 
-			if (platformName.includes('pc')) {
-				platformIcon = './img/svg/windows-icon.svg'
-			} else if (platformName.includes('xbox')) {
-				platformIcon = './img/svg/xbox-icon.svg'
-			} else if (platformName.includes('playstation')) {
-				platformIcon = './img/svg/playstation-icon.svg'
-			} else if (platformName.includes('nintendo')) {
-				platformIcon = './img/svg/nintendo-icon.svg'
-			} else if (platformName.includes('apple macintosh')) {
-				platformIcon = './img/svg/mac-icon.svg'
-			} else if (platformName.includes('android')) {
-				platformIcon = './img/svg/android-icon.svg'
-			} else if (platformName.includes('linux')) {
-				platformIcon = './img/svg/linux-icon.svg'
-			} else if (platformName.includes('web')) {
-				platformIcon = './img/svg/web-icon.svg'
-			} else if (platformName.includes('ios')) {
-				platformIcon = './img/svg/ios-icon.svg'
-			} else if (platformName.includes('sega')) {
-				platformIcon = './img/svg/sega-icon.svg'
-			} else if (platformName.includes('commodore')) {
-				platformIcon = './img/svg/commodore-icon.svg'
-			} else if (platformName.includes('atari')) {
-				platformIcon = './img/svg/atari-icon.svg'
+			const iconMap = {
+				'pc': './img/svg/windows-icon.svg',
+				'xbox': './img/svg/xbox-icon.svg',
+				'playstation': './img/svg/playstation-icon.svg',
+				'nintendo': './img/svg/nintendo-icon.svg',
+				'apple macintosh': './img/svg/mac-icon.svg',
+				'android': './img/svg/android-icon.svg',
+				'linux': './img/svg/linux-icon.svg',
+				'web': './img/svg/web-icon.svg',
+				'ios': './img/svg/ios-icon.svg',
+				'sega': './img/svg/sega-icon.svg',
+				'commodore': './img/svg/commodore-icon.svg',
+				'atari': './img/svg/atari-icon.svg'
+			}
+
+			for (const key in iconMap) {
+				if (platformName.includes(key)) {
+					platformIcon = iconMap[key]
+					break
+				}
 			}
 
 			if (array.length === 7 && index === 5) {
@@ -56,11 +96,16 @@ export function renderGames(data, append = false) {
 			return null
 		}).filter(Boolean)
 
-		const formattedDate = new Date(`${gameData.released}`).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+		const dateFormatted = new Date(`${gameData.released}`).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 
-		const genresString = gameData.genres.map(g => `<span class='border-b-[1px] border-solid border-[]'>${g.name}</span>`).join(', ')
+		const genresFormatted = gameData.genres.map(g => `<span class='border-b-[1px] border-solid border-[rgba(255, 255, 255, 0.4]'>${g.name}</span>`).join(', ')
 
 		const bgImg = gameData.background_image || 'https://placehold.co/1280x720/000000/white?text=404%0APicture+not+found&font=oswald'
+
+		const ratingEmoji = { exceptional: '🎯', recommended: '👍', meh: '😑', skip: '⛔' }[gameData.ratings?.[0]?.title?.toLowerCase()] || ''
+		
+		const addedFormatted = gameData.added.toString().slice(0, 2) + ',' + gameData.added.toString().slice(2);
+
 
 		function metacriticCheck() {
 			if (gameData.metacritic) {
@@ -70,68 +115,79 @@ export function renderGames(data, append = false) {
 			}
 		}
 
-		return `
-					<div class="gameContainer">
-						<div class="gameCard bg-[#202020] shadow-lg text-white rounded-[12px] overflow-hidden h-fit transition-transform hover:scale-103">
-							<div class="w-full overflow-hidden" style="aspect-ratio: 16 / 9;">
-								<img src="${bgImg}" class="w-full h-full object-cover object-center" />
-							</div>
-							<div class="px-[16px] pt-[16px] pb-[28px] flex flex-col">
-								<div class="flex items-center justify-between mb-[7px]">
-									<div class="flex items-center gap-[6px]">
-										${platformsHTML.join('')}
-									</div>
-									${metacriticCheck()}
-								</div>
-								<div class="text-[24px] font-[700] leading-[28px] mb-[10px]">
-									${gameData.name}
-								</div>
-								<button class="group bg-[#ffffff1a] flex items-center text-white text-sm p-[6px_8px] rounded gap-[6px] w-fit transition-colors hover:bg-white hover:text-black">
-									<img class='group-hover:brightness-0 w-[12px] h-[12px]' src="./img/svg/plus.svg" alt="">
-									<span class='text-[12px] leading-[12px]'>${gameData.added.toLocaleString()}</span>
-								</button>
-								<div class='flex-col'>
-									<div class='flex items-center justify-between text-[12px] py-[12px]'>
-										<span class=' opacity-40'>Release date:</span><span></span>${formattedDate}</span>
-									</div>
-									<div class='flex items-center justify-between text-[12px] py-[12px] border-t-[1px] border-b-[1px] border-solid border-[hsla(0,0%,100%,.07)]'>
-										<span class=' opacity-40'>Genres:</span><span>${genresString}</span>
-									</div>
-									<div class='flex items-center justify-between text-[12px] py-[12px]'>
-										<span class=' opacity-40'>Chart:</span><span>Sorry, not working</span>
-									</div>
-									<button class='w-full flex items-center justify-between p-[12px_16px] cursor-pointer bg-[hsla(0,0%,100%,.07)] rounded-[8px] text-[14px] text-white transition-colors hover:text-[#fad860]'>Show more like this <img src="./img/svg/arrow.svg" class='-rotate-90 w-[18px] h-[12px] opacity-40' alt="arrow"></button>
-								</div>
-							</div>
+		const card = document.createElement('div')
+		card.classList.add('gameContainer')
+		card.innerHTML = `
+			<div class="gameCard bg-[#202020] shadow-lg text-white rounded-[12px] overflow-hidden h-fit transition-transform duration-300 hover:scale-103">
+				<div class="w-full overflow-hidden aspect-video">
+					<img src="${bgImg}" class="w-full h-full object-cover object-center" />
+				</div>
+				<div class="px-[16px] pt-[16px] pb-[24px] flex flex-col">
+					<div class="flex items-center justify-between mb-[7px]">
+						<div class="flex items-center gap-[6px]">
+							${platformsHTML.join('')}
 						</div>
+						${metacriticCheck()}
 					</div>
-            `
-	})
-		.join('')
+					<a href='./gamePage.html' class="text-[24px] font-[700] leading-[28px] mb-[10px] transition-opacity hover:opacity-40">
+						${gameData.name}${ratingEmoji}
+					</a>
+					<button class="group bg-[#ffffff1a] flex items-center text-white text-sm p-[6px_8px] rounded gap-[6px] w-fit transition-colors hover:bg-white hover:text-black">
+						<img class='group-hover:brightness-0 w-[12px] h-[12px]' src="./img/svg/plus.svg" alt="">
+						<span class='text-[12px] leading-[12px]'>${addedFormatted}</span>
+					</button>
+					<div class='flex-col'>
+						<div class='flex items-center justify-between text-[12px] py-[12px]'>
+							<span class=' opacity-40'>Release date:</span><span></span>${dateFormatted}</span>
+						</div>
+						<div class='flex items-center justify-between text-[12px] py-[12px] border-t-[1px] border-b-[1px] border-solid border-[hsla(0,0%,100%,.07)]'>
+							<span class=' opacity-40'>Genres:</span><span>${genresFormatted}</span>
+						</div>
+						<div class='flex items-center justify-between text-[12px] py-[12px]'>
+							<span class=' opacity-40'>Chart:</span><span>Sorry, not working</span>
+						</div>
+						<button class='w-full flex items-center justify-between p-[12px_16px] cursor-pointer bg-[hsla(0,0%,100%,.07)] rounded-[8px] text-[14px] text-white transition-colors hover:text-[#fad860]'>Show more like this <img src="./img/svg/arrow.svg" class='-rotate-90 w-[18px] h-[12px] opacity-40' alt="arrow"></button>
+					</div>
+				</div>
+			</div>
+    `
+		return card
+	}
+}
 
+export function updateCardHeights() {
 	const elements = document.querySelectorAll('.gameContainer')
 	if (elements.length > 0) {
 		elements.forEach((container) => {
-			const childHeight = container.firstElementChild.offsetHeight
-			container.style.maxHeight = `${childHeight}px`
-		})
-	}
-	window.addEventListener('resize', () => {
-		if (elements.length > 0) {
-			elements.forEach((container) => {
+			if (container.firstElementChild && container.offsetParent !== null) {
 				const childHeight = container.firstElementChild.offsetHeight
 				container.style.maxHeight = `${childHeight}px`
-			})
-		}
-	})
+			}
+		})
+	}
 }
+
+window.addEventListener('resize', () => {
+	createColumns()
+
+	const columns = Array.from(contentContainer.children)
+	let columnIndex = 0
+
+	gameElements.forEach((game) => {
+		const column = columns[columnIndex]
+		column.appendChild(game)
+		columnIndex = (columnIndex + 1) % columns.length
+	})
+
+	updateCardHeights()
+})
 
 export function renderPlatforms(data) {
 	text1.innerHTML = 'Platforms'
 	text2.classList.add('hidden')
 	orderContainer.classList.add('hidden')
 
-	content.innerHTML += data.results
+	contentContainer.innerHTML += data.results
 		.map(cardData => {
 			return `
 		<div class="flex relative flex-col items-center rounded-[6px] p-[32px_24px]" style="background-image: linear-gradient(rgba(32, 32, 32, 0.5), rgb(32, 32, 32) 70%), url('${cardData.image_background
@@ -174,7 +230,7 @@ export function renderStores(data) {
 	text2.classList.add('hidden')
 	orderContainer.classList.add('hidden')
 
-	content.innerHTML += data.results
+	contentContainer.innerHTML += data.results
 		.map(cardData => {
 			return `
 		<div class="flex relative flex-col items-center rounded-[6px] p-[32px_24px]" style="background-image: linear-gradient(rgba(32, 32, 32, 0.5), rgb(32, 32, 32) 70%), url('${cardData.image_background
@@ -217,7 +273,7 @@ export function renderGenres(data) {
 	text2.classList.add('hidden')
 	orderContainer.classList.add('hidden')
 
-	content.innerHTML += data.results
+	contentContainer.innerHTML += data.results
 		.map(cardData => {
 			return `
 		<div class="flex relative flex-col items-center rounded-[6px] p-[32px_24px]" style="background-image: linear-gradient(rgba(32, 32, 32, 0.5), rgb(32, 32, 32) 70%), url('${cardData.image_background
@@ -260,7 +316,7 @@ export function renderCreators(data) {
 	text2.classList.add('hidden')
 	orderContainer.classList.add('hidden')
 
-	content.innerHTML += data.results
+	contentContainer.innerHTML += data.results
 		.map(cardData => {
 			const positions = cardData.positions
 				.map(p => p.name[0].toUpperCase() + p.name.slice(1))
@@ -314,7 +370,7 @@ export function renderTags(data) {
 	text2.classList.add('hidden')
 	orderContainer.classList.add('hidden')
 
-	content.innerHTML += data.results
+	contentContainer.innerHTML += data.results
 		.map(cardData => {
 			return `
 		<div class="flex relative flex-col items-center rounded-[6px] p-[32px_24px]" style="background-image: linear-gradient(rgba(32, 32, 32, 0.5), rgb(32, 32, 32) 70%), url('${cardData.image_background
@@ -357,7 +413,7 @@ export function renderDevelopers(data) {
 	text2.classList.add('hidden')
 	orderContainer.classList.add('hidden')
 
-	content.innerHTML += data.results
+	contentContainer.innerHTML += data.results
 		.map(cardData => {
 			return `
 		<div class="flex relative flex-col items-center rounded-[6px] p-[32px_24px]" style="background-image: linear-gradient(rgba(32, 32, 32, 0.5), rgb(32, 32, 32) 70%), url('${cardData.image_background
@@ -400,7 +456,7 @@ export function renderPublishers(data) {
 	text2.classList.add('hidden')
 	orderContainer.classList.add('hidden')
 
-	content.innerHTML += data.results
+	contentContainer.innerHTML += data.results
 		.map(cardData => {
 			return `
 		<div class="flex relative flex-col items-center rounded-[6px] p-[32px_24px]" style="background-image: linear-gradient(rgba(32, 32, 32, 0.5), rgb(32, 32, 32) 70%), url('${cardData.image_background

@@ -1,3 +1,5 @@
+import { updateCardHeights } from './renders.js'
+
 document.addEventListener('DOMContentLoaded', () => {
 	const gridOption = document.getElementById('gridDisplayOption')
 	const listOption = document.getElementById('listDisplayOption')
@@ -25,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			gridOption.setAttribute('data-active', 'false')
 			listOption.setAttribute('data-active', 'true')
 			localStorage.setItem('displayOption', 'list')
+			updateCardHeights()
 		}
 	}
 
