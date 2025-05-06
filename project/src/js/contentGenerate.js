@@ -1,3 +1,5 @@
+const APIKey = '1d238169109b4ffe9eaf244df6dea4f9'
+
 import {
 	renderCreators,
 	renderDevelopers,
@@ -64,7 +66,6 @@ export function renderContent(append = false) {
 	}
 
 	const ordering = new URLSearchParams(window.location.search).get('ordering') || 'popularity'
-	const APIKey = '1d238169109b4ffe9eaf244df6dea4f9'
 	let reqUrl = `${url}${filter}?key=${APIKey}`
 
 	if (filter === 'games') {
