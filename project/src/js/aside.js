@@ -90,15 +90,23 @@ function generateAsideBlocks(containerId) {
 			} else {
 				linkDiv.addEventListener('click', event => {
 					event.preventDefault()
-					updateQueryParam(
-						'filter',
-						link.link.toLowerCase().replace(/\s+/g, '_')
-						)
 
-					renderContent(false)
-					 window.scrollTo({
-							top: 0,
-							behavior: 'smooth',
+					const newFilter = link.link.toLowerCase().replace(/\s+/g, '_')
+
+					if (window.location.pathname !== '/index.html' && window.location.pathname !== '/') {
+						window.location.href = `/index.html?filter=${newFilter}`
+						return
+					}
+
+					updateQueryParam('filter', newFilter)
+
+					if (!window.location.pathname.includes('gamePage.html')) {
+						renderContent(false)
+					}
+
+					window.scrollTo({
+						top: 0,
+						behavior: 'smooth',
 					})
 				})
 			}
@@ -117,7 +125,6 @@ function generateAsideBlocks(containerId) {
 			linkDiv.appendChild(imgDiv)
 			linkDiv.appendChild(text)
 
-			// Приховуємо елементи, якщо їх більше ніж 4
 			if (index >= 4) {
 				linkDiv.style.display = 'none'
 			}
@@ -178,15 +185,23 @@ function generateAsideBlocks(containerId) {
 			allGamesLink.textContent = 'All Games'
 
 			allGamesLink.addEventListener('click', event => {
-					event.preventDefault()
-					updateQueryParam(
-						'filter',
-						"games".toLowerCase().replace(/\s+/g, '_')
-					)
-				})
-				allGamesLink.addEventListener('click', () => {
-					renderContent()
-				})
+				event.preventDefault()
+
+				if (window.location.pathname !== '/index.html' && window.location.pathname !== '/') {
+					window.location.href = '/index.html'
+					return
+				}
+
+				updateQueryParam(
+					'filter',
+					"games".toLowerCase().replace(/\s+/g, '_')
+				)
+			})
+			allGamesLink.addEventListener('click', () => {
+				if (!window.location.pathname.includes('gamePage.html')) {
+					renderContent(false)
+				}
+			})
 			allGamesDiv.appendChild(allGamesLink)
 
 			container.appendChild(allGamesDiv)

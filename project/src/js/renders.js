@@ -34,6 +34,7 @@ function getShortestColumn() {
 }
 
 export function renderGames(data, append = false) {
+	document.title = 'All Games • RAWG'
 	text1.innerHTML = 'All Games'
 	text2.classList.add('hidden')
 	orderContainer.classList.remove('hidden')
@@ -103,8 +104,8 @@ export function renderGames(data, append = false) {
 		const bgImg = gameData.background_image || 'https://placehold.co/1280x720/000000/white?text=404%0APicture+not+found&font=oswald'
 
 		const ratingEmoji = { exceptional: '🎯', recommended: '👍', meh: '😑', skip: '⛔' }[gameData.ratings?.[0]?.title?.toLowerCase()] || ''
-		
-		const addedFormatted = gameData.added.toString().slice(0, 2) + ',' + gameData.added.toString().slice(2);
+
+		const addedFormatted = gameData.added.toString().slice(0, 2) + ',' + gameData.added.toString().slice(2)
 
 
 		function metacriticCheck() {
@@ -114,6 +115,7 @@ export function renderGames(data, append = false) {
 				return `<div></div>`
 			}
 		}
+
 
 		const card = document.createElement('div')
 		card.classList.add('gameContainer')
@@ -129,7 +131,7 @@ export function renderGames(data, append = false) {
 						</div>
 						${metacriticCheck()}
 					</div>
-					<a href='./gamePage.html' class="text-[24px] font-[700] leading-[28px] mb-[10px] transition-opacity hover:opacity-40">
+					<a href='./gamePage.html?id=${gameData.id}' class="text-[24px] font-[700] leading-[28px] mb-[10px] transition-opacity hover:opacity-40">
 						${gameData.name}${ratingEmoji}
 					</a>
 					<button class="group bg-[#ffffff1a] flex items-center text-white text-sm p-[6px_8px] rounded gap-[6px] w-fit transition-colors hover:bg-white hover:text-black">
@@ -146,7 +148,7 @@ export function renderGames(data, append = false) {
 						<div class='flex items-center justify-between text-[12px] py-[12px]'>
 							<span class=' opacity-40'>Chart:</span><span>Sorry, not working</span>
 						</div>
-						<button class='w-full flex items-center justify-between p-[12px_16px] cursor-pointer bg-[hsla(0,0%,100%,.07)] rounded-[8px] text-[14px] text-white transition-colors hover:text-[#fad860]'>Show more like this <img src="./img/svg/arrow.svg" class='-rotate-90 w-[18px] h-[12px] opacity-40' alt="arrow"></button>
+						<button class='notWorking w-full flex items-center justify-between p-[12px_16px] cursor-pointer bg-[hsla(0,0%,100%,.07)] rounded-[8px] text-[14px] text-white transition-colors hover:text-[#fad860]'>Show more like this <img src="./img/svg/arrow.svg" class='-rotate-90 w-[18px] h-[12px] opacity-40' alt="arrow"></button>
 					</div>
 				</div>
 			</div>
@@ -168,6 +170,10 @@ export function updateCardHeights() {
 }
 
 window.addEventListener('resize', () => {
+	if (window.location.pathname.includes('gamePage.html')) {
+		return
+	}
+
 	createColumns()
 
 	const columns = Array.from(contentContainer.children)
@@ -183,6 +189,7 @@ window.addEventListener('resize', () => {
 })
 
 export function renderPlatforms(data) {
+	document.title = 'Platforms • RAWG'
 	text1.innerHTML = 'Platforms'
 	text2.classList.add('hidden')
 	orderContainer.classList.add('hidden')
@@ -226,6 +233,7 @@ export function renderPlatforms(data) {
 }
 
 export function renderStores(data) {
+	document.title = 'Stores • RAWG'
 	text1.innerHTML = 'Stores'
 	text2.classList.add('hidden')
 	orderContainer.classList.add('hidden')
@@ -269,6 +277,7 @@ export function renderStores(data) {
 }
 
 export function renderGenres(data) {
+	document.title = 'Genres • RAWG'
 	text1.innerHTML = 'Genres'
 	text2.classList.add('hidden')
 	orderContainer.classList.add('hidden')
@@ -312,6 +321,7 @@ export function renderGenres(data) {
 }
 
 export function renderCreators(data) {
+	document.title = 'Creators • RAWG'
 	text1.innerHTML = 'Creators'
 	text2.classList.add('hidden')
 	orderContainer.classList.add('hidden')
@@ -366,6 +376,7 @@ export function renderCreators(data) {
 }
 
 export function renderTags(data) {
+	document.title = 'Tags • RAWG'
 	text1.innerHTML = 'Tags'
 	text2.classList.add('hidden')
 	orderContainer.classList.add('hidden')
@@ -409,6 +420,7 @@ export function renderTags(data) {
 }
 
 export function renderDevelopers(data) {
+	document.title = 'Developers • RAWG'
 	text1.innerHTML = 'Developers'
 	text2.classList.add('hidden')
 	orderContainer.classList.add('hidden')
@@ -452,6 +464,7 @@ export function renderDevelopers(data) {
 }
 
 export function renderPublishers(data) {
+	document.title = 'Publishers • RAWG'
 	text1.innerHTML = 'Publishers'
 	text2.classList.add('hidden')
 	orderContainer.classList.add('hidden')
@@ -492,4 +505,66 @@ export function renderPublishers(data) {
 	`
 		})
 		.join('')
+}
+
+export function renderGamePage(data) {
+	const bg = document.getElementById('background-layer')
+
+	bg.style.cssText = `
+		position: absolute;
+		width: 100vw;
+		height: 100vh;
+		background-image: linear-gradient(rgba(32, 32, 32, 0.5), rgb(32, 32, 32) 50%), url('${data.background_image}');
+		background-size: 100% auto;
+		background-position: top;
+		background-repeat: no-repeat;
+		z-index: -10;
+		opacity: 0.8;
+		filter: brightness(0.8);
+	`
+
+	const date = new Date(data.released);
+	const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+	const formattedDate = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+
+	contentContainer.innerHTML = `
+	<div class='flex flex-row'>
+		<div class='flex flex-col'>
+			<div class='flex flex-row gap-[15px] mb-[12px]'>
+				<div class='bg-white p-[2px_7.5px] text-[12px] rounded-[4px] leading-[15px] tracking-[2px]'>
+					${formattedDate}
+				</div>
+				<div class="flex items-center gap-[10px]">
+					<img class='h-[16px] w-auto' src="./img/svg/windows-icon.svg" alt="">
+					<img class='h-[16px] w-auto' src="./img/svg/playstation-icon.svg" alt="">
+					<img class='h-[16px] w-auto' src="./img/svg/xbox-icon.svg" alt="">
+				</div>
+				<span class='uppercase text-[12px] tracking-[2px] text-white'>Average playtime: ${data.playtime} hours</span>
+			</div>
+
+			<div class='mb-[24px]'>
+				<h1 class='text-[72px] font-[700] leading-[74px] text-white'>${data.name}</h1>
+			</div>
+
+			<div class='mb-[32px]'>
+				<button class='relative overflow-hidden p-[5px_16px] bg-white rounded-[6px] min-w-[180px] cursor-pointer'>
+					<div class='flex flex-col text-start'>
+						<span class='text-[12px] leading-[14px] opacity-40'>Add to</span>
+						<span class='text-[18px] leading-[22px]'>My games</span>
+					</div>
+					<div class='absolute top-[50%] translate-y-[-50%] right-[-7px]'>
+						<svg width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="a"><stop stop-color="#B4EC51" offset="0%" /><stop stop-color="#429321" offset="100%" /></linearGradient></defs><path d="M18 0C8.018 0 0 8.018 0 18s8.018 18 18 18 18-8.018 18-18S27.982 0 18 0zm9.818 18.818c0 .491-.327.818-.818.818h-6.955c-.245 0-.409.164-.409.41V27c0 .49-.327.818-.818.818h-1.636c-.491 0-.818-.327-.818-.818v-6.955c0-.245-.164-.409-.41-.409H9c-.49 0-.818-.327-.818-.818v-1.636c0-.491.327-.818.818-.818h6.955c.245 0 .409-.164.409-.41V9c0-.49.327-.818.818-.818h1.636c.491 0 .818.327.818.818v6.955c0 .245.164.409.41.409H27c.49 0 .818.327.818.818v1.636z"fill="url(#a)" fill-rule="evenodd" /></svg>
+					</div>
+				</button>
+			</div>
+
+			<div class='flex flex-col text-white'>
+				<span class='text-[24px] font-[700] leading-[28px] mb-[8px]'>About</span>
+				<p class='max-h-[176px] max-w-[530px] leading-[22px] text-[16px] overflow-hidden text-ellipsis'>
+					${data.description_raw.replaceAll('\n', '<br />')}
+				</p>
+			</div>
+		</div>
+	</div>
+	`
 }

@@ -1,8 +1,9 @@
-import { API_KEY } from '../env.js';
+import { API_KEY } from '../env.js'
 
 import {
 	renderCreators,
 	renderDevelopers,
+	renderGamePage,
 	renderGames,
 	renderGenres,
 	renderPlatforms,
@@ -64,8 +65,7 @@ export function renderContent(append = false) {
 		filter = searchParams.get('filter')
 	}
 
-	const ordering =
-		new URLSearchParams(window.location.search).get('ordering') || 'popularity'
+	const ordering = new URLSearchParams(window.location.search).get('ordering') || 'popularity'
 	const APIKey = API_KEY
 	let reqUrl = `${url}${filter}?key=${APIKey}`
 
@@ -160,5 +160,24 @@ window.addEventListener('scroll', () => {
 })
 
 document.addEventListener('DOMContentLoaded', () => {
+	const searchParams = new URLSearchParams(window.location.search)
+
+	if (window.location.pathname.includes('gamePage.html')) {
+		if (searchParams.has('id')) {
+			const gameId = searchParams.get('id')
+			const url = `https://api.rawg.io/api/games/${gameId}?key=${API_KEY}`
+
+			sendRequest('GET', url)
+				.then(data => {
+					renderGamePage(data)
+				})
+				.catch(error => {
+					console.error('Error fetching game data:', error)
+				})
+		}
+		return
+	}
+
 	renderContent()
+	
 })

@@ -182,8 +182,14 @@
   .top-\[-5px\] {
     top: -5px;
   }
+  .top-\[50\%\] {
+    top: 50%;
+  }
   .right-0 {
     right: calc(var(--spacing) * 0);
+  }
+  .right-\[-7px\] {
+    right: -7px;
   }
   .bottom-0 {
     bottom: calc(var(--spacing) * 0);
@@ -218,6 +224,9 @@
   .mt-\[8px\] {
     margin-top: 8px;
   }
+  .mt-\[50px\] {
+    margin-top: 50px;
+  }
   .mr-\[5px\] {
     margin-right: 5px;
   }
@@ -248,11 +257,17 @@
   .mb-\[10px\] {
     margin-bottom: 10px;
   }
+  .mb-\[12px\] {
+    margin-bottom: 12px;
+  }
   .mb-\[16px\] {
     margin-bottom: 16px;
   }
   .mb-\[24px\] {
     margin-bottom: 24px;
+  }
+  .mb-\[32px\] {
+    margin-bottom: 32px;
   }
   .ml-\[5px\] {
     margin-left: 5px;
@@ -275,6 +290,9 @@
   .hidden {
     display: none;
   }
+  .table {
+    display: table;
+  }
   .aspect-video {
     aspect-ratio: var(--aspect-video);
   }
@@ -295,6 +313,9 @@
   }
   .h-\[14px\] {
     height: 14px;
+  }
+  .h-\[16px\] {
+    height: 16px;
   }
   .h-\[18px\] {
     height: 18px;
@@ -319,6 +340,18 @@
   }
   .h-full {
     height: 100%;
+  }
+  .max-h-\[150px\] {
+    max-height: 150px;
+  }
+  .max-h-\[173\.5px\] {
+    max-height: 173.5px;
+  }
+  .max-h-\[173px\] {
+    max-height: 173px;
+  }
+  .max-h-\[176px\] {
+    max-height: 176px;
   }
   .w-\[4px\] {
     width: 4px;
@@ -359,14 +392,29 @@
   .w-full {
     width: 100%;
   }
+  .max-w-\[5\] {
+    max-width: 5;
+  }
   .max-w-\[70\%\] {
     max-width: 70%;
   }
   .max-w-\[220px\] {
     max-width: 220px;
   }
+  .max-w-\[529px\] {
+    max-width: 529px;
+  }
+  .max-w-\[530px\] {
+    max-width: 530px;
+  }
+  .max-w-\[960px\] {
+    max-width: 960px;
+  }
   .min-w-\[32px\] {
     min-width: 32px;
+  }
+  .min-w-\[180px\] {
+    min-width: 180px;
   }
   .min-w-\[220px\] {
     min-width: 220px;
@@ -376,6 +424,13 @@
   }
   .flex-1 {
     flex: 1;
+  }
+  .border-collapse {
+    border-collapse: collapse;
+  }
+  .translate-y-\[-50\%\] {
+    --tw-translate-y: -50%;
+    translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .-rotate-90 {
     rotate: calc(90deg * -1);
@@ -401,6 +456,9 @@
   .justify-between {
     justify-content: space-between;
   }
+  .justify-center {
+    justify-content: center;
+  }
   .gap-\[2px\] {
     gap: 2px;
   }
@@ -416,8 +474,14 @@
   .gap-\[8px\] {
     gap: 8px;
   }
+  .gap-\[10px\] {
+    gap: 10px;
+  }
   .gap-\[15\.8px\] {
     gap: 15.8px;
+  }
+  .gap-\[15px\] {
+    gap: 15px;
   }
   .gap-\[16px\] {
     gap: 16px;
@@ -451,6 +515,10 @@
   }
   .rounded-full {
     border-radius: calc(infinity * 1px);
+  }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
   }
   .border-\[1px\] {
     border-style: var(--tw-border-style);
@@ -486,6 +554,9 @@
   .bg-\[\#3b3b3b\] {
     background-color: #3b3b3b;
   }
+  .bg-\[\#3b3b3bhsla\(0\,0\%\,100\%\,\.6\)\] {
+    background-color: #3b3b3bhsla(0,0%,100%,.6);
+  }
   .bg-\[\#202020\] {
     background-color: #202020;
   }
@@ -498,8 +569,14 @@
   .bg-\[hsla\(0\,0\%\,100\%\,\.1\)\] {
     background-color: hsla(0,0%,100%,.1);
   }
+  .bg-\[hsla\(0\,0\%\,100\%\,\.6\)\] {
+    background-color: hsla(0,0%,100%,.6);
+  }
   .bg-\[hsla\(0\,0\%\,100\%\,\.07\)\] {
     background-color: hsla(0,0%,100%,.07);
+  }
+  .bg-\[hsla\(0\,0\%\,100\%\,\.16\)\] {
+    background-color: hsla(0,0%,100%,.16);
   }
   .bg-white {
     background-color: var(--color-white);
@@ -509,6 +586,12 @@
   }
   .object-center {
     object-position: center;
+  }
+  .p-\[2px_7\.5px\] {
+    padding: 2px 7.5px;
+  }
+  .p-\[5px_16px\] {
+    padding: 5px 16px;
   }
   .p-\[6px_8px\] {
     padding: 6px 8px;
@@ -579,6 +662,9 @@
   .text-center {
     text-align: center;
   }
+  .text-start {
+    text-align: start;
+  }
   .font-\[monospace\] {
     font-family: monospace;
   }
@@ -622,6 +708,10 @@
     --tw-leading: 14px;
     line-height: 14px;
   }
+  .leading-\[15px\] {
+    --tw-leading: 15px;
+    line-height: 15px;
+  }
   .leading-\[17\.5px\] {
     --tw-leading: 17.5px;
     line-height: 17.5px;
@@ -633,6 +723,10 @@
   .leading-\[20px\] {
     --tw-leading: 20px;
     line-height: 20px;
+  }
+  .leading-\[22px\] {
+    --tw-leading: 22px;
+    line-height: 22px;
   }
   .leading-\[28px\] {
     --tw-leading: 28px;
@@ -662,12 +756,22 @@
     --tw-tracking: 0;
     letter-spacing: 0;
   }
+  .tracking-\[2px\] {
+    --tw-tracking: 2px;
+    letter-spacing: 2px;
+  }
   .tracking-\[5px\] {
     --tw-tracking: 5px;
     letter-spacing: 5px;
   }
   .text-nowrap {
     text-wrap: nowrap;
+  }
+  .text-wrap {
+    text-wrap: wrap;
+  }
+  .overflow-ellipsis {
+    text-overflow: ellipsis;
   }
   .text-ellipsis {
     text-overflow: ellipsis;
@@ -687,12 +791,22 @@
   .text-white {
     color: var(--color-white);
   }
+  .uppercase {
+    text-transform: uppercase;
+  }
+  .underline {
+    text-decoration-line: underline;
+  }
   .opacity-40 {
     opacity: 40%;
   }
   .shadow-lg {
     --tw-shadow: 0 10px 15px -3px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 4px 6px -4px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .outline {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
   }
   .outline-0 {
     outline-style: var(--tw-outline-style);
@@ -1112,6 +1226,21 @@ body {
 .gameContainer:hover > .gameCard > div:last-child > div:last-child {
   display: flex;
 }
+@property --tw-translate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
 @property --tw-rotate-x {
   syntax: "*";
   inherits: false;
@@ -1308,6 +1437,9 @@ body {
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-translate-z: 0;
       --tw-rotate-x: rotateX(0);
       --tw-rotate-y: rotateY(0);
       --tw-rotate-z: rotateZ(0);
