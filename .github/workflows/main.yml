@@ -34,8 +34,4 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           script: |
             cd ${{ secrets.TARGET }}
-            rm -rf *
             tar -xzf project-src.tar.gz
-            rm project-src.tar.gz
-            mv src/* ./
-            rm -rf src
