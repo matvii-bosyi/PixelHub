@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (window.location.pathname.includes('gamePage.html')) {
 		if (searchParams.has('id')) {
 			const gameId = searchParams.get('id')
-			const url = `https://api.rawg.io/api/games/${gameId}?key=${API_KEY}`
+			const url = `https://api.rawg.io/api/games/${gameId}?key=${APIKey}`
 
 			sendRequest('GET', url)
 				.then(data => {
