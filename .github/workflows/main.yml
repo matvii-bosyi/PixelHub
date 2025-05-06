@@ -1,0 +1,40 @@
+name: Build Project main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Archive src folder
+        run: |
+          mkdir -p .temp
+          tar -czf .temp/project-src.tar.gz -C project src
+
+      - name: Upload archive via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          source: .temp/project-src.tar.gz
+          target: ${{ secrets.TARGET }}
+
+      - name: Extract archive on server
+        uses: appleboy/ssh-action@v0.1.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            cd ${{ secrets.TARGET }}
+            tar -xzf project-src.tar.gz
+            rm project-src.tar.gz
+            mv src/* ./
+            rm -rf src
