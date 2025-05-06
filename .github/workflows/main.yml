@@ -15,7 +15,7 @@ jobs:
       - name: Archive src folder
         run: |
           mkdir -p .temp
-          tar -czf .temp/project-src.tar.gz -C project src
+          tar -czf project-src.tar.gz -C project src
 
       - name: Upload archive via SCP
         uses: appleboy/scp-action@v0.1.7
@@ -23,7 +23,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          source: .temp/project-src.tar.gz
+          source: project-src.tar.gz
           target: ${{ secrets.TARGET }}
 
       - name: Extract archive on server
@@ -35,3 +35,6 @@ jobs:
           script: |
             cd ${{ secrets.TARGET }}
             tar -xzf project-src.tar.gz
+            rm project-src.tar.gz
+            mv src/* ./
+            rm -rf src
